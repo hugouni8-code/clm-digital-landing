@@ -167,29 +167,39 @@ ul {
 
 
 /* ==============================================
-   5. HEADER / NAVBAR
+   5. HEADER / NAVBAR (ESTILO FLOTANTE)
    ============================================== */
 .site-header {
-  position: sticky;
-  top: 0;
+  position: fixed; /* Se queda pegado al hacer scroll */
+  top: 20px; /* Deja un hueco por arriba para que "flote" */
   left: 0;
   right: 0;
-  z-index: 100;
-  background-color: rgba(0, 0, 0, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(190, 229, 239, 0.12);
-  padding: var(--sp-xs) var(--sp-md);
+  z-index: 999;
+  background: transparent; /* Quitamos la barra negra entera */
+  border: none;
+  padding: 0 15px; /* Margen para que no toque los bordes del móvil */
+  display: flex;
+  justify-content: center; /* Centra la píldora en la pantalla */
+  pointer-events: none; /* Permite hacer clic "a través" de las zonas invisibles */
 }
 
 .header-logos {
+  pointer-events: auto; /* Reactiva los clics dentro del menú */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;      /* FIX: si los logos no caben, bajan de línea */
-  gap: var(--sp-sm);
-  max-width: 1200px;
-  margin: 0 auto;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px; /* Limita el ancho para que parezca una píldora */
+  
+  /* --- LA MAGIA DEL CRISTAL (GLASSMORPHISM) --- */
+  background-color: rgba(18, 40, 52, 0.45); /* Tu azul marino pero muy transparente */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(190, 229, 239, 0.15); /* Borde sutil luminoso */
+  border-radius: 50px; /* Forma redondeada total */
+  padding: 0.5rem 1.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4); /* Sombra para despegarlo del fondo */
 }
 
 /* Items de logo */
@@ -950,6 +960,13 @@ ul {
     word-break: normal !important;
     overflow-wrap: normal !important;
     white-space: nowrap !important; 
+  }
+  /* 5. DRAGÓN: Evitar zoom destructivo y centrar la cara */
+  .hero-wrapper {
+    /* En vez de 'cover', ajustamos el tamaño basándonos en el ancho para que no se pixele */
+    background-size: 130% auto !important; 
+    /* Movemos la imagen hacia arriba para que la cara del dragón quede perfecta */
+    background-position: center 10% !important; 
   }
 }
 
