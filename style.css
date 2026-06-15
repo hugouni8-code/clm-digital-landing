@@ -358,30 +358,13 @@ ul {
   animation: fadeSlideUp 0.9s var(--ease-out) 0.4s both;
 }
 
-/* Propiedades adicionales del título hero: tamaño, centrado móvil */
-.hero-title {
-  font-family: var(--font-title);
-  font-weight: 800;
-
-  /* 1.55rem mínimo → "DESPERTAR" y "DRAGÓN" caben en 360px en una línea */
-  font-size: clamp(1.55rem, 7vw, 8rem);
-
-  line-height: 1.0;
-
-  letter-spacing: -0.04em;
-
-  /* sin max-width en móvil para que el centrado funcione correctamente */
-  max-width: 14ch;
-
-  margin-bottom: var(--sp-md);
-
-  text-transform: uppercase;
-
-  /* Sin guiones bajo ninguna circunstancia */
-  hyphens: none;
-  -webkit-hyphens: none;
-  overflow-wrap: normal;
-  word-break: normal;
+/* max-width solo en desktop para el efecto póster de 2 líneas */
+@media (min-width: 768px) {
+  .hero-title {
+    max-width: 14ch;
+    font-size: clamp(3rem, 7vw, 8rem);
+    letter-spacing: -0.04em;
+  }
 }
 
 /* Subtítulo Playfair Display Italic */
@@ -717,15 +700,10 @@ ul {
 
 .coming-container {
   width: 100%;
-  max-width: 100vw;
   margin: 0 auto;
-  
-  /* REDUCIMOS AL MÁXIMO EL PADDING para que la palabra tenga toda la pantalla */
-  padding: 0 5px var(--sp-xl) 5px !important; 
+  padding: 0 clamp(1rem, 4vw, 3rem) var(--sp-xl);
   text-align: center;
-  
-  /* Evita que el contenedor estalle hacia los lados */
-  overflow: hidden !important; 
+  /* SIN overflow:hidden — ese es el culpable del recorte */
 }
 
 /* Divisor decorativo */
@@ -775,27 +753,36 @@ ul {
   font-family: var(--font-title);
   font-weight: 800;
 
-  /* TAMAÑO INFALIBLE: 
-     Intentará usar el 5.5% de la pantalla (5.5vw). Como tiene 12 letras, 
-     gastará un 66% de la pantalla. Le sobra un 34% de espacio libre. 
-     NUNCA bajará de 1.2rem ni superará 4.5rem.
+  /*
+    LÓGICA SIMPLE:
+    "PRÓXIMAMENTE" tiene 13 caracteres.
+    En 360px → cada carácter puede tener ~27px → 1.7rem.
+    Usamos 1.6rem como mínimo para tener margen seguro.
+    En desktop sube hasta 5rem.
   */
-  font-size: clamp(1.2rem, 5.5vw, 4.5rem) !important; 
+  font-size: clamp(1.6rem, 6vw, 5rem);
 
-  line-height: 1;
-  letter-spacing: -0.04em !important; /* Apretamos las letras al máximo */
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   color: var(--c-black);
-  
+
   width: 100%;
   text-align: center;
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
 
-  /* PROHIBICIÓN ABSOLUTA DE CORTES O SALTOS */
-  white-space: nowrap !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
+  /*
+    LA CAUSA RAÍZ DEL PROBLEMA:
+    white-space: nowrap impedía que el texto hiciera wrap,
+    y overflow:hidden en el padre lo recortaba por la derecha.
+    Con wrap normal + font-size bien calculado, no hace falta nowrap.
+  */
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+  -webkit-hyphens: none;
 }
 
 .coming-dots {
@@ -936,7 +923,7 @@ ul {
    11. RESPONSIVE: BREAKPOINTS ADICIONALES
    ============================================== */
 
-/* Móvil pequeño (≤ 600px): centrado y tamaños seguros sin guiones */
+/* Móvil pequeño (≤ 600px) */
 @media (max-width: 600px) {
   /* Hero: centrar el bloque de texto y el título */
   .hero-content {
@@ -946,7 +933,6 @@ ul {
   }
   .hero-text-block {
     text-align: center;
-    /* anular max-width para que el centrado sea perfecto */
     max-width: 100%;
   }
   .hero-eyebrow {
@@ -955,7 +941,6 @@ ul {
   .hero-title {
     max-width: 100%;
     text-align: center;
-    /* tamaño seguro para 360px: DESPERTAR y DRAGÓN caben en una línea */
     font-size: clamp(1.55rem, 7.8vw, 3rem);
     letter-spacing: -0.02em;
   }
@@ -964,60 +949,51 @@ ul {
     font-size: 0.95rem;
   }
 
-  /* Sección ediciones: compensar letter-spacing para centrado óptico */
+  /* Sección ediciones */
   .section-title {
     font-size: clamp(1.6rem, 6vw, 2.5rem);
-    /* reducir letter-spacing en móvil elimina el desplazamiento óptico
-       que hacía que "ANTERIORES" pareciera desviada a la derecha */
     letter-spacing: 0.02em;
     padding-right: 0.02em;
   }
 
-  /* Próximamente: tamaño que garantiza una línea en 360px */
+  /*
+    PRÓXIMAMENTE en móvil:
+    - white-space: normal → permite que el texto ocupe su espacio real
+    - sin overflow:hidden en el padre → no se recorta
+    - font-size con vw asegura que escala con la pantalla
+  */
   .coming-title {
-    /* La función min() elige el valor más pequeño. 
-       Garantiza que nunca desborde ni en móviles anchos ni estrechos */
-    font-size: min(8vw, 2.5rem) !important; 
-    
-    letter-spacing: -0.02em !important; /* Apretamos un pelín las letras */
-    padding: 0 10px !important;
-    
-    /* Centrado absoluto */
-    display: block !important;
-    width: 100% !important;
-    text-align: center !important;
-    
-    /* Red de seguridad final para que no rompa la palabra jamás */
-    word-break: normal !important;
-    white-space: nowrap !important;
+    font-size: clamp(1.6rem, 8vw, 2.8rem);
+    letter-spacing: -0.02em;
+    white-space: normal;
   }
-  /* 5. DRAGÓN: Evitar zoom destructivo y centrar la cara */
+
+  /* Imagen del dragón en móvil */
   .hero-wrapper {
-    /* 'cover' asegura que NO haya huecos vacíos */
-    background-size: cover !important; 
-    /* 'center 15%' enfoca la cámara en la cara del dragón */
-    background-position: center 15% !important; 
+    background-size: cover;
+    background-position: center 15%;
   }
-  @media (max-width: 600px) {
-  /* Ajustes del menú flotante en dispositivos móviles */
+
+  /* Menú flotante en móvil */
   .site-nav {
-    padding: 0.5rem 1.3rem; /* Menos padding interno en pantallas estrechas */
+    padding: 0.5rem 1.3rem;
   }
-  
   .nav-list {
-    gap: 1.2rem; /* Comprimimos el espacio entre enlaces para que quepan holgadamente */
+    gap: 1.2rem;
   }
-  
   .nav-link {
-    font-size: 0.85rem; /* Letra ligeramente más pequeña en móvil */
+    font-size: 0.85rem;
   }
-}
 }
 
 /* Móvil muy pequeño (≤ 360px) */
 @media (max-width: 360px) {
   .hero-title {
-    font-size: 1.55rem;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  .coming-title {
+    font-size: 1.6rem;
     letter-spacing: -0.02em;
   }
   .section-title {
@@ -1028,11 +1004,11 @@ ul {
   .hero-subtitle {
     font-size: 0.9rem;
   }
-  .header-logos {
-    gap: 0.4rem;
+  .nav-list {
+    gap: 0.8rem;
   }
-  .logo-tag {
-    font-size: 0.6rem;
+  .nav-link {
+    font-size: 0.8rem;
   }
 }
 
