@@ -317,15 +317,14 @@ ul {
 .hero-eyebrow {
   display: flex;
   align-items: center;
-  /* FIX: en alineación izquierda, el kicker arranca desde la izquierda */
   justify-content: flex-start;
   gap: var(--sp-sm);
   font-family: var(--font-accent);
-  font-weight: 300;
-  font-size: 0.85rem;
+  font-weight: 700;
+  font-size: 1rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--c-slate);
+  color: var(--c-gray-light2);
   margin-bottom: var(--sp-md);
   animation: fadeSlideDown 0.8s var(--ease-out) 0.2s both;
 }
