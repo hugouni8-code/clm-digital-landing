@@ -1,0 +1,946 @@
+/* ==============================================
+   CLM-Digital V · Landing Page
+   style.css — Mobile First · CSS Puro · Sin Frameworks
+   Autor: CLM-Digital / Eboratic
+   ============================================== */
+
+
+/* ==============================================
+   1. VARIABLES DEL SISTEMA DE DISEÑO (:root)
+   ============================================== */
+:root {
+  /* --- Paleta de colores --- */
+  --c-white:        #FFFFFF;
+  --c-gray-light2:  #F0F0F0;
+  --c-gray-light:   #C2C2C2;
+  --c-gray-mid:     #6E6E6E;
+  --c-black:        #000000;
+  --c-blue-mid:     #36789B;
+  --c-blue-dark:    #245067;
+  --c-slate:        #59696E;
+  --c-ice-blue:     #BEE5EF;
+  --c-orange:       #AD3701;
+  --c-pale-blue:    #D3E9F0;
+  --c-navy:         #122834;
+
+  /* --- Tipografías --- */
+  --font-title:     'Syne', sans-serif;           /* Títulos, encabezados */
+  --font-serif:     'Playfair Display', serif;    /* Subtítulo hero */
+  --font-accent:    'Karantina', cursive;         /* Acentos decorativos */
+  --font-body:      'Familjen Grotesk', sans-serif; /* Cuerpo, menús, desc */
+
+  /* --- Espaciado base --- */
+  --sp-xs:   0.5rem;
+  --sp-sm:   1rem;
+  --sp-md:   2rem;
+  --sp-lg:   3rem;
+  --sp-xl:   5rem;
+  --sp-2xl:  8rem;
+
+  /* --- Radios --- */
+  --radius-card: 16px;
+  --radius-sm:   6px;
+
+  /* --- Transiciones --- */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --transition: 0.3s var(--ease-out);
+}
+
+
+/* ==============================================
+   2. RESET Y BASE GLOBAL
+   ============================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--c-navy);
+  color: var(--c-gray-light2);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Focus visible accesible */
+:focus-visible {
+  outline: 2px dashed var(--c-ice-blue);
+  outline-offset: 4px;
+}
+
+
+/* ==============================================
+   3. UTILIDADES
+   ============================================== */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+
+/* ==============================================
+   4. HERO WRAPPER (Header + Hero = 100vh)
+   ============================================== */
+.hero-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(5, 10, 15, 0.78) 0%,
+      rgba(5, 10, 15, 0.45) 35%,
+      rgba(5, 10, 15, 0.60) 70%,
+      rgba(5, 10, 15, 0.92) 100%
+    ),
+    url("img/dragon-estatico.png");
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #122834;
+}
+
+/* Efecto de escamas/textura sobre el hero */
+.hero-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    repeating-linear-gradient(
+      60deg,
+      transparent,
+      transparent 40px,
+      rgba(173,55,1,0.02) 40px,
+      rgba(173,55,1,0.02) 41px
+    ),
+    repeating-linear-gradient(
+      -60deg,
+      transparent,
+      transparent 40px,
+      rgba(190,229,239,0.02) 40px,
+      rgba(190,229,239,0.02) 41px
+    );
+
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+/* ==============================================
+   5. HEADER / NAVBAR
+   ============================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(190, 229, 239, 0.12);
+  padding: var(--sp-xs) var(--sp-md);
+}
+
+.header-logos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-sm);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Items de logo */
+.logo-item {
+  display: flex;
+  align-items: center;
+  transition: opacity var(--transition);
+}
+
+.logo-item:hover {
+  opacity: 0.75;
+}
+
+/* Placeholder visual del logo (sustituir por <img> real) */
+.logo-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 var(--sp-sm);
+  border: 1px solid rgba(190, 229, 239, 0.25);
+  border-radius: var(--radius-sm);
+  background: rgba(190, 229, 239, 0.06);
+  cursor: pointer;
+}
+
+.logo-tag {
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-ice-blue);
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Logo principal: más prominente */
+.logo-main .logo-placeholder {
+  border-color: rgba(173, 55, 1, 0.5);
+  background: rgba(173, 55, 1, 0.1);
+}
+
+.logo-main .logo-tag {
+  color: var(--c-orange);
+  font-size: 0.75rem;
+}
+
+/* Logo Eboratic */
+.logo-right .logo-tag {
+  color: var(--c-gray-light2);
+  letter-spacing: 0.2em;
+}
+
+
+/* ==============================================
+   6. HERO CONTENT
+   ============================================== */
+.hero-content {
+  position: relative;
+  z-index: 2;
+
+  flex: 1;
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: flex-start;
+
+  padding:
+    clamp(4rem, 8vw, 8rem)
+    clamp(1.5rem, 5vw, 5rem)
+    clamp(3rem, 8vh, 6rem);
+
+  min-height: calc(100vh - 72px);
+}
+
+/* Overlay decorativo bajo el texto */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(173, 55, 1, 0.15) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+/* Bloque de texto del hero: anclado abajo a la izquierda, estilo póster */
+.hero-text-block {
+  width: 100%;
+  max-width: 1400px;
+}
+/* Eyebrow (kicker) con líneas decorativas */
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  /* FIX: en alineación izquierda, el kicker arranca desde la izquierda */
+  justify-content: flex-start;
+  gap: var(--sp-sm);
+  font-family: var(--font-accent);
+  font-weight: 300;
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-slate);
+  margin-bottom: var(--sp-md);
+  animation: fadeSlideDown 0.8s var(--ease-out) 0.2s both;
+}
+
+.eyebrow-line {
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--c-orange));
+}
+
+.eyebrow-line:last-child {
+  background: linear-gradient(to left, transparent, var(--c-orange));
+}
+
+/* Título principal H1 */
+.hero-title {
+  font-family: var(--font-title);
+  font-weight: 800;
+  /*
+    FIX 2: clamp recalculado para 2 líneas anchas.
+    - Mínimo 2.2rem: en móvil 360px cabe "IA: El despertar" sin overflow
+    - Fluido 8.5vw: escala suavemente con el viewport
+    - Máximo 8.8rem: en desktop 1400px "IA: EL DESPERTAR" ocupa ~800px → 2 líneas
+  */
+  font-size: clamp(2.2rem, 8.5vw, 8.8rem);
+  line-height: 0.93;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--sp-md);
+  animation: fadeSlideUp 0.9s var(--ease-out) 0.4s both;
+}
+
+/* Gradiente en el texto del título (regla separada para no pisar font-size) */
+.hero-title {
+  font-family: var(--font-title);
+  font-weight: 800;
+
+  font-size: clamp(3rem, 7vw, 8rem);
+
+  line-height: 0.92;
+
+  letter-spacing: -0.04em;
+
+  max-width: 14ch;
+
+  margin-bottom: var(--sp-md);
+
+  text-transform: uppercase;
+}
+
+/* Subtítulo Playfair Display Italic */
+.hero-subtitle {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  line-height: 1.5;
+  color: var(--c-gray-light2);
+  /* FIX: quitamos "margin: 0 auto" — no funciona con text-align: left */
+  max-width: 680px;
+  margin-bottom: var(--sp-lg);
+  opacity: 0.9;
+  animation: fadeSlideUp 1s var(--ease-out) 0.6s both;
+}
+
+/* CTA de fecha */
+.hero-cta-date {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  padding: 0.75rem 2rem;
+  border: 1px solid rgba(190, 229, 239, 0.3);
+  border-radius: 50px;
+  background: rgba(190, 229, 239, 0.07);
+  backdrop-filter: blur(8px);
+  animation: fadeSlideUp 1.1s var(--ease-out) 0.8s both;
+}
+
+.cta-ornament {
+  font-family: var(--font-accent);
+  color: var(--c-orange);
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+.cta-date-text {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.25em;
+  color: var(--c-ice-blue);
+}
+
+
+/* ==============================================
+   7. SECCIÓN EDICIONES ANTERIORES
+   ============================================== */
+.editions-section {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    var(--c-pale-blue) 0%,
+    var(--c-ice-blue) 100%
+  );
+  padding: var(--sp-xl) var(--sp-md);
+  overflow: hidden;
+}
+
+/* Ola decorativa en la transición con el hero */
+.section-wave-top {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: var(--c-navy);
+  clip-path: ellipse(55% 100% at 50% 0%);
+}
+
+.editions-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: var(--sp-lg);
+}
+
+/* Header de sección */
+.section-header {
+  text-align: center;
+  margin-bottom: var(--sp-xl);
+}
+
+.section-kicker {
+  font-family: var(--font-accent);
+  font-weight: 300;
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-blue-mid);
+  margin-bottom: var(--sp-xs);
+}
+
+.section-title {
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--c-navy);
+  line-height: 1;
+  margin-bottom: var(--sp-sm);
+}
+
+.section-desc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--c-blue-dark);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ---- GRID DE TARJETAS ---- */
+/*
+   Mobile First:
+   - 1 columna en móvil
+   - 2 columnas en tablet
+   - 3 columnas en desktop
+*/
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-md);
+}
+
+/* Tablet: 2 columnas */
+@media (min-width: 600px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: 3 columnas */
+/* Tablet y pantallas medianas (2 columnas) */
+@media (min-width: 600px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop amplio (4 columnas en línea) */
+@media (min-width: 1200px) {
+  .cards-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ---- TARJETA INDIVIDUAL ---- */
+.card {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background-color: var(--c-navy);
+  box-shadow:
+    0 8px 32px rgba(18, 40, 52, 0.35),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 16px 48px rgba(18, 40, 52, 0.45),
+    0 4px 16px rgba(173, 55, 1, 0.2);
+}
+
+.card article {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Imagen de la tarjeta */
+.card-image-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  flex-shrink: 0;
+  /* Garantiza que los bordes superiores redondeados se apliquen a la imagen */
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+}
+
+/* -------------------------------------------------------
+   CORRECCIÓN 3: <img> con object-fit para rellenar la caja
+   sin deformarse. Cuando src esté vacío se ve el fondo de
+   color hasta que insertes la ruta real.
+   ------------------------------------------------------- */
+.card-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover mantiene las proporciones y recorta los bordes */
+  object-fit: cover;
+  object-position: center top; /* prioriza la parte superior (caras, logos) */
+  transition: transform 0.5s var(--ease-out);
+  /* Cuando src="" el navegador muestra alt-text sobre este fondo de color */
+  background-color: var(--c-navy);
+}
+
+/* Fallbacks visuales por edición mientras no haya imagen real */
+.card-img-1-bg { background: linear-gradient(135deg, #1a2a3a 0%, #2d6080 50%, #0d1f2e 100%); }
+.card-img-2-bg { background: linear-gradient(135deg, #1a0e05 0%, #6b2a00 50%, #0d1f2e 100%); }
+.card-img-3-bg { background: linear-gradient(135deg, #0d1f2e 0%, #1f4a60 40%, #8b3000 100%); }
+
+.card:hover .card-img {
+  transform: scale(1.04);
+}
+
+/*
+   Placeholder de imagen — YA NO SE USA, conservado por compatibilidad.
+   Se puede eliminar en producción.
+*/
+.card-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: var(--sp-sm);
+  transition: transform 0.5s var(--ease-out);
+}
+
+.card:hover .card-img-placeholder {
+  transform: scale(1.04);
+}
+
+.card-img-1 {
+  background: linear-gradient(135deg, #1a2a3a 0%, #2d6080 50%, #0d1f2e 100%);
+}
+
+.card-img-2 {
+  background: linear-gradient(135deg, #1a0e05 0%, #6b2a00 50%, #0d1f2e 100%);
+}
+
+.card-img-3 {
+  background: linear-gradient(135deg, #0d1f2e 0%, #1f4a60 40%, #8b3000 100%);
+}
+
+.card-img-label {
+  font-family: var(--font-accent);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(190, 229, 239, 0.5);
+  background: rgba(0,0,0,0.3);
+  padding: 0.2em 0.6em;
+  border-radius: 4px;
+}
+
+/* Cuerpo de texto de la tarjeta */
+.card-body {
+  padding: var(--sp-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+  flex: 1;
+}
+
+.card-edition-badge {
+  font-family: var(--font-accent);
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--c-slate);
+}
+
+.card-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  color: var(--c-orange);
+  letter-spacing: 0.01em;
+}
+
+.card-desc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--c-gray-light2);
+  opacity: 0.85;
+  flex: 1;
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: var(--sp-xs);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--c-blue-mid);
+  text-transform: uppercase;
+  transition: color var(--transition), gap var(--transition);
+}
+
+.card-link:hover {
+  color: var(--c-ice-blue);
+  gap: 0.7em;
+}
+
+
+/* ==============================================
+   8. SECCIÓN PRÓXIMAMENTE
+   ============================================== */
+.coming-section {
+  background: linear-gradient(
+    180deg,
+    var(--c-ice-blue) 0%,
+    var(--c-pale-blue) 40%,
+    var(--c-pale-blue) 100%
+  );
+  padding-top: var(--sp-xl);
+  /*
+    FIX 3: overflow-x: hidden en la sección corta cualquier desbordamiento
+    lateral sin colapsar el layout vertical.
+  */
+  overflow-x: hidden;
+}
+
+.coming-container {
+  width: 100%;
+  margin: 0 auto;
+
+  padding-left: max(24px, 5vw);
+  padding-right: max(24px, 5vw);
+  padding-bottom: var(--sp-xl);
+
+  text-align: center;
+}
+
+/* Divisor decorativo */
+.coming-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-xl);
+  color: var(--c-blue-dark);
+  opacity: 0.5;
+}
+
+.coming-divider span:not(.divider-icon) {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--c-blue-mid));
+}
+
+.coming-divider span:last-child {
+  background: linear-gradient(to left, transparent, var(--c-blue-mid));
+}
+
+.divider-icon {
+  font-size: 0.75rem;
+  color: var(--c-blue-dark);
+  flex: none;
+}
+
+/* Bloque principal PRÓXIMAMENTE */
+.coming-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+.coming-kicker {
+  font-family: var(--font-accent);
+  font-weight: 300;
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-blue-mid);
+}
+
+.coming-title {
+  font-family: var(--font-title);
+  font-weight: 800;
+
+  font-size: clamp(2.2rem, 8vw, 5.8rem);
+
+  line-height: 1;
+
+  letter-spacing: 0.02em;
+
+  text-transform: uppercase;
+
+  color: var(--c-black);
+
+  width: 100%;
+
+  overflow-wrap: normal;
+  word-break: keep-all;
+
+  padding-inline: 0.25rem;
+}
+
+.coming-dots {
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  letter-spacing: 0.5em;
+  color: var(--c-blue-mid);
+  opacity: 0.6;
+}
+
+.coming-date {
+  display: block;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 6vw, 3.5rem);
+  letter-spacing: 0.06em;
+  color: var(--c-navy);
+}
+
+.coming-tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--c-blue-dark);
+  line-height: 1.6;
+  margin-top: var(--sp-sm);
+}
+
+.coming-tagline em {
+  font-style: italic;
+  color: var(--c-orange);
+}
+
+
+/* ==============================================
+   9. FOOTER
+   ============================================== */
+.site-footer {
+  background-color: var(--c-navy);
+  border-top: 1px solid rgba(190, 229, 239, 0.1);
+  padding: var(--sp-md) var(--sp-md) var(--sp-sm);
+  text-align: center;
+}
+
+.footer-nav {
+  margin-bottom: var(--sp-sm);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-sm) var(--sp-md);
+}
+
+.footer-link {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-blue-dark);
+  transition: color var(--transition);
+  position: relative;
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--c-blue-mid);
+  transition: width var(--transition);
+}
+
+.footer-link:hover {
+  color: var(--c-ice-blue);
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+.footer-copy {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--c-slate);
+  opacity: 0.7;
+}
+
+.footer-copy small {
+  font-size: inherit;
+}
+
+
+/* ==============================================
+   10. ANIMACIONES
+   ============================================== */
+
+/* Entrada desde arriba */
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Entrada desde abajo */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Parpadeo suave para la fecha */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+
+.coming-date {
+  animation: pulse-soft 3s ease-in-out infinite;
+}
+
+
+/* ==============================================
+   11. RESPONSIVE: BREAKPOINTS ADICIONALES
+   ============================================== */
+
+/* Móvil pequeño (≤ 360px) */
+@media (max-width: 360px) {
+  /* El clamp(2.2rem, 8.5vw, 8.8rem) ya maneja el mínimo; solo tocamos
+     casos extremos donde el viewport es muy estrecho */
+  .hero-title {
+    letter-spacing: -0.03em; /* un poco más comprimido para ganar espacio */
+  }
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+  .header-logos {
+    gap: 0.4rem;
+  }
+  .logo-tag {
+    font-size: 0.6rem;
+  }
+}
+
+/* Tablet (≥ 768px) */
+@media (min-width: 768px) {
+  .hero-content {
+    /* Más aire arriba en tablet para que la imagen del dragón respire */
+    padding: var(--sp-2xl) 5vw 6rem;
+  }
+  .hero-eyebrow {
+    font-size: 0.95rem;
+  }
+  .eyebrow-line {
+    width: 60px;
+  }
+  .card-title {
+    font-size: 1.25rem;
+  }
+  .site-header {
+    padding: var(--sp-sm) var(--sp-xl);
+  }
+}
+
+/* Desktop amplio (≥ 1200px) */
+@media (min-width: 1200px) {
+  .site-header {
+    padding: var(--sp-sm) var(--sp-2xl);
+  }
+  .editions-section {
+    padding: var(--sp-2xl) var(--sp-xl);
+  }
+  .section-wave-top {
+    height: 120px;
+  }
+}
+
+/* Preferencia de movimiento reducido (accesibilidad) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
