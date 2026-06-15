@@ -717,13 +717,15 @@ ul {
 
 .coming-container {
   width: 100%;
+  max-width: 100vw;
   margin: 0 auto;
-
-  padding-left: max(24px, 5vw);
-  padding-right: max(24px, 5vw);
-  padding-bottom: var(--sp-xl);
-
+  
+  /* REDUCIMOS AL MÁXIMO EL PADDING para que la palabra tenga toda la pantalla */
+  padding: 0 5px var(--sp-xl) 5px !important; 
   text-align: center;
+  
+  /* Evita que el contenedor estalle hacia los lados */
+  overflow: hidden !important; 
 }
 
 /* Divisor decorativo */
@@ -773,23 +775,24 @@ ul {
   font-family: var(--font-title);
   font-weight: 800;
 
-  /* EL ARREGLO PARA TODOS LOS DISPOSITIVOS: 
-     Le decimos que SIEMPRE mida el 7% de la pantalla (7vw). 
-     Como tiene 12 letras, gastará en total un 84% de la pantalla, sobrando espacio por los lados.
-     El '5rem' es el tope máximo para que en teles gigantes no se vea colosal. */
-  font-size: min(7vw, 5rem) !important; 
+  /* TAMAÑO INFALIBLE: 
+     Intentará usar el 5.5% de la pantalla (5.5vw). Como tiene 12 letras, 
+     gastará un 66% de la pantalla. Le sobra un 34% de espacio libre. 
+     NUNCA bajará de 1.2rem ni superará 4.5rem.
+  */
+  font-size: clamp(1.2rem, 5.5vw, 4.5rem) !important; 
 
   line-height: 1;
-  letter-spacing: -0.02em !important;
+  letter-spacing: -0.04em !important; /* Apretamos las letras al máximo */
   text-transform: uppercase;
   color: var(--c-black);
   
   width: 100%;
   text-align: center;
-  padding: 0 !important;
   margin: 0 !important;
+  padding: 0 !important;
 
-  /* Prohibición absoluta de partituras, guiones o saltos de línea */
+  /* PROHIBICIÓN ABSOLUTA DE CORTES O SALTOS */
   white-space: nowrap !important;
   word-break: normal !important;
   overflow-wrap: normal !important;
