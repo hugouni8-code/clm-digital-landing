@@ -691,19 +691,15 @@ ul {
     var(--c-pale-blue) 100%
   );
   padding-top: var(--sp-xl);
-  /*
-    FIX 3: overflow-x: hidden en la sección corta cualquier desbordamiento
-    lateral sin colapsar el layout vertical.
-  */
-  overflow-x: hidden;
+  /* SIN overflow-x:hidden — recortaba el texto en móvil */
 }
 
 .coming-container {
   width: 100%;
   margin: 0 auto;
-  padding: 0 clamp(1rem, 4vw, 3rem) var(--sp-xl);
+  /* SIN padding lateral — el texto ocupa todo el ancho disponible */
+  padding: 0 0 var(--sp-xl) 0;
   text-align: center;
-  /* SIN overflow:hidden — ese es el culpable del recorte */
 }
 
 /* Divisor decorativo */
@@ -754,30 +750,28 @@ ul {
   font-weight: 800;
 
   /*
-    LÓGICA SIMPLE:
-    "PRÓXIMAMENTE" tiene 13 caracteres.
-    En 360px → cada carácter puede tener ~27px → 1.7rem.
-    Usamos 1.6rem como mínimo para tener margen seguro.
-    En desktop sube hasta 5rem.
+    CÁLCULO MATEMÁTICO GARANTIZADO:
+    "PRÓXIMAMENTE" = 13 caracteres en mayúsculas con Syne 800.
+    Con letter-spacing: -0.03em la fuente ocupa aprox. 0.6em por carácter.
+    Para caber en 100vw: font-size = 100vw / (13 × 0.6) = 12.8vw
+    Usamos 7vw (conservador) → en 360px = 25.2px × 13 = ~328px. Cabe.
+    Sin clamp mínimo que fuerce un tamaño demasiado grande.
   */
-  font-size: clamp(1.6rem, 6vw, 5rem);
+  font-size: clamp(1rem, 7vw, 5rem);
 
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   text-transform: uppercase;
   color: var(--c-black);
 
+  /* Ocupa todo el ancho del contenedor */
   width: 100%;
+  display: block;
   text-align: center;
   margin: 0;
   padding: 0;
 
-  /*
-    LA CAUSA RAÍZ DEL PROBLEMA:
-    white-space: nowrap impedía que el texto hiciera wrap,
-    y overflow:hidden en el padre lo recortaba por la derecha.
-    Con wrap normal + font-size bien calculado, no hace falta nowrap.
-  */
+  /* Texto fluye con normalidad — sin nowrap, sin overflow */
   white-space: normal;
   word-break: normal;
   overflow-wrap: normal;
@@ -958,14 +952,14 @@ ul {
 
   /*
     PRÓXIMAMENTE en móvil:
-    - white-space: normal → permite que el texto ocupe su espacio real
-    - sin overflow:hidden en el padre → no se recorta
-    - font-size con vw asegura que escala con la pantalla
+    7vw × 13 chars × 0.6 factor = ~54.6vw de ancho total → cabe en 100vw
+    sin necesidad de padding lateral
   */
   .coming-title {
-    font-size: clamp(1.6rem, 8vw, 2.8rem);
-    letter-spacing: -0.02em;
+    font-size: 7vw;
+    letter-spacing: -0.03em;
     white-space: normal;
+    padding: 0;
   }
 
   /* Imagen del dragón en móvil */
@@ -993,8 +987,9 @@ ul {
     letter-spacing: -0.02em;
   }
   .coming-title {
-    font-size: 1.6rem;
-    letter-spacing: -0.02em;
+    font-size: 7vw; /* = 25.2px en 360px → 13 chars caben sin problema */
+    letter-spacing: -0.03em;
+    padding: 0;
   }
   .section-title {
     font-size: 1.6rem;
