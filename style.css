@@ -170,36 +170,56 @@ ul {
    5. HEADER / NAVBAR (ESTILO FLOTANTE)
    ============================================== */
 .site-header {
-  position: fixed; /* Se queda pegado al hacer scroll */
-  top: 20px; /* Deja un hueco por arriba para que "flote" */
+  position: fixed; /* Se mantiene fijo al hacer scroll */
+  top: 20px;       /* Despegado del techo para dar efecto flotante */
   left: 0;
   right: 0;
   z-index: 999;
-  background: transparent; /* Quitamos la barra negra entera */
+  background: transparent;
   border: none;
-  padding: 0 15px; /* Margen para que no toque los bordes del móvil */
+  padding: 0 15px;
   display: flex;
-  justify-content: center; /* Centra la píldora en la pantalla */
-  pointer-events: none; /* Permite hacer clic "a través" de las zonas invisibles */
+  justify-content: center; /* Centrado absoluto horizontal */
+  pointer-events: none;    /* Evita bloquear clics fuera del menú */
 }
 
-.header-logos {
-  pointer-events: auto; /* Reactiva los clics dentro del menú */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  width: 100%;
-  max-width: 600px; /* Limita el ancho para que parezca una píldora */
-  
-  /* --- LA MAGIA DEL CRISTAL (GLASSMORPHISM) --- */
-  background-color: rgba(18, 40, 52, 0.45); /* Tu azul marino pero muy transparente */
+.site-nav {
+  pointer-events: auto;    /* Reactiva los clics dentro de la píldora */
+  background-color: rgba(18, 40, 52, 0.55); /* Cristal esmerilado oscuro */
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(190, 229, 239, 0.15); /* Borde sutil luminoso */
-  border-radius: 50px; /* Forma redondeada total */
-  padding: 0.5rem 1.5rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4); /* Sombra para despegarlo del fondo */
+  border: 1px solid rgba(190, 229, 239, 0.15); /* Borde sutil reflectante */
+  border-radius: 50px;     /* Forma de píldora total */
+  padding: 0.6rem 2rem;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4); /* Sombra para ganar profundidad */
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 2rem; /* Espaciado elegante entre los enlaces */
+}
+
+.nav-link {
+  font-family: var(--font-body); /* Tu fuente limpia Familjen Grotesk */
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--c-gray-light2);
+  letter-spacing: 0.02em;
+  transition: color var(--transition), transform var(--transition);
+  display: inline-block;
+}
+
+/* Efecto al pasar el ratón por encima */
+.nav-link:hover {
+  color: var(--c-orange); /* Cambia al color naranja corporativo */
+  transform: translateY(-1px);
+}
+
+/* Estado activo para resaltar la sección actual */
+.nav-link.active {
+  color: var(--c-ice-blue);
+  font-weight: 600;
 }
 
 /* Items de logo */
@@ -968,6 +988,20 @@ ul {
     /* Movemos la imagen hacia arriba para que la cara del dragón quede perfecta */
     background-position: center 10% !important; 
   }
+  @media (max-width: 600px) {
+  /* Ajustes del menú flotante en dispositivos móviles */
+  .site-nav {
+    padding: 0.5rem 1.3rem; /* Menos padding interno en pantallas estrechas */
+  }
+  
+  .nav-list {
+    gap: 1.2rem; /* Comprimimos el espacio entre enlaces para que quepan holgadamente */
+  }
+  
+  .nav-link {
+    font-size: 0.85rem; /* Letra ligeramente más pequeña en móvil */
+  }
+}
 }
 
 /* Móvil muy pequeño (≤ 360px) */
