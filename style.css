@@ -972,21 +972,28 @@ ul {
 
   /* Próximamente: tamaño que garantiza una línea en 360px */
   .coming-title {
-    font-size: 7.5vw !important; 
-    line-height: 1;
-    padding: 0 5px;
+    /* La función min() elige el valor más pequeño. 
+       Garantiza que nunca desborde ni en móviles anchos ni estrechos */
+    font-size: min(8vw, 2.5rem) !important; 
     
-    /* Obligamos a que sea una sola línea inquebrantable */
+    letter-spacing: -0.02em !important; /* Apretamos un pelín las letras */
+    padding: 0 10px !important;
+    
+    /* Centrado absoluto */
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    
+    /* Red de seguridad final para que no rompa la palabra jamás */
     word-break: normal !important;
-    overflow-wrap: normal !important;
-    white-space: nowrap !important; 
+    white-space: nowrap !important;
   }
   /* 5. DRAGÓN: Evitar zoom destructivo y centrar la cara */
   .hero-wrapper {
-    /* En vez de 'cover', ajustamos el tamaño basándonos en el ancho para que no se pixele */
-    background-size: 130% auto !important; 
-    /* Movemos la imagen hacia arriba para que la cara del dragón quede perfecta */
-    background-position: center 10% !important; 
+    /* 'cover' asegura que NO haya huecos vacíos */
+    background-size: cover !important; 
+    /* 'center 15%' enfoca la cámara en la cara del dragón */
+    background-position: center 15% !important; 
   }
   @media (max-width: 600px) {
   /* Ajustes del menú flotante en dispositivos móviles */
