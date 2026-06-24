@@ -281,18 +281,11 @@ ul {
 .hero-content {
   position: relative;
   z-index: 2;
-
   flex: 1;
   display: flex;
-
-  align-items: flex-end;
-  justify-content: flex-start;
-
-  padding:
-    clamp(4rem, 8vw, 8rem)
-    clamp(1.5rem, 5vw, 5rem)
-    clamp(3rem, 8vh, 6rem);
-
+  align-items: center; /* Cambiado a center para centrado vertical */
+  justify-content: center; /* Cambiado a center para centrado horizontal */
+  padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5rem) clamp(3rem, 8vh, 6rem);
   min-height: calc(100vh - 72px);
 }
 
@@ -312,12 +305,16 @@ ul {
 .hero-text-block {
   width: 100%;
   max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Apila los elementos en el centro */
+  text-align: center; /* Asegura que el texto en sí esté centrado */
 }
 /* Eyebrow (kicker) con líneas decorativas */
 .hero-eyebrow {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center; /* Cambiado de flex-start a center */
   gap: var(--sp-sm);
   font-family: var(--font-accent);
   font-weight: 700;
@@ -1381,5 +1378,51 @@ ul {
   }
   html {
     scroll-behavior: auto;
+  }
+}
+/* --- Cuenta Regresiva Hero --- */
+.countdown-container {
+  display: flex;
+  justify-content: center; /* Se alinea a la izquierda como el resto del texto */
+  gap: var(--sp-sm);
+  margin-top: var(--sp-md);
+  /* Misma animación que la fecha para que aparezcan juntos */
+  animation: fadeSlideUp 1.2s var(--ease-out) 0.9s both; 
+}
+
+.time-box {
+  background: rgba(190, 229, 239, 0.07); /* Mismo fondo de cristal que hero-cta-date */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(190, 229, 239, 0.3);
+  padding: 15px 12px;
+  border-radius: var(--radius-sm);
+  min-width: 75px;
+  text-align: center;
+  color: var(--c-ice-blue);
+}
+
+.time-box span {
+  font-family: var(--font-title); /* Fuente Syne */
+  font-size: 2rem;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+  color: var(--c-white);
+}
+
+.time-box p {
+  margin: 5px 0 0 0;
+  font-family: var(--font-accent); /* Fuente Karantina */
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-orange); /* Toque del naranja corporativo */
+}
+
+/* Ajuste para que se centre en móviles igual que el resto del texto */
+@media (max-width: 600px) {
+  .countdown-container {
+    justify-content: center;
   }
 }

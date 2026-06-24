@@ -80,6 +80,24 @@
           <span class="cta-ornament" aria-hidden="true">—</span>
         </div>
 
+        <div class="countdown-container" aria-label="Cuenta regresiva para el evento">
+          <div class="time-box">
+            <span id="days">00</span>
+            <p>Días</p>
+          </div>
+          <div class="time-box">
+            <span id="hours">00</span>
+            <p>Hrs</p>
+          </div>
+          <div class="time-box">
+            <span id="minutes">00</span>
+            <p>Min</p>
+          </div>
+          <div class="time-box">
+            <span id="seconds">00</span>
+            <p>Seg</p>
+          </div>
+        </div>
       </div>
     </div>
     <!-- /HERO -->
@@ -340,6 +358,37 @@
 
   </section>
   <!-- /PRÓXIMAMENTE -->
+
+</body>
+</html>
+</section>
+  <script>
+    // Fecha del evento: 28 de Octubre de 2026 a las 09:00:00
+    const eventDate = new Date("Oct 28, 2026 09:00:00").getTime();
+
+    const timer = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      // Cálculos de tiempo
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Si la cuenta no ha terminado, actualizamos el HTML
+      if (distance > 0) {
+        document.getElementById("days").innerHTML = String(days).padStart(2, '0');
+        document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
+        document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
+        document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
+      } else {
+        // Si el evento ya empezó, detenemos el contador y mostramos ceros
+        clearInterval(timer);
+        document.querySelector(".countdown-container").innerHTML = "<h3 style='color: var(--c-ice-blue); font-family: var(--font-title);'>¡El evento ha comenzado!</h3>";
+      }
+    }, 1000);
+  </script>
 
 </body>
 </html>
