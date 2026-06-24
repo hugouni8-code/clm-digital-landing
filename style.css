@@ -337,6 +337,53 @@ ul {
   background: linear-gradient(to left, transparent, var(--c-orange));
 }
 
+/* --- Botón de Ubicación Hero --- */
+.hero-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem; /* Lo separa un poco de la fecha de arriba */
+  padding: 0.6rem 1.5rem;
+  border-radius: 50px;
+  background: rgba(190, 229, 239, 0.05);
+  border: 1px solid rgba(190, 229, 239, 0.2);
+  color: var(--c-ice-blue);
+  text-decoration: none;
+  transition: all var(--transition);
+  
+  /* Misma animación de entrada que el resto para que aparezca en cascada */
+  animation: fadeSlideUp 1s var(--ease-out) 0.85s both; 
+}
+
+/* Efecto al pasar el ratón por encima */
+.hero-location:hover {
+  background: rgba(190, 229, 239, 0.15);
+  border-color: var(--c-orange);
+  color: var(--c-white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(173, 55, 1, 0.2);
+}
+
+.location-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--c-orange);
+  transition: transform var(--transition);
+}
+
+/* Pequeño rebote en el icono al hacer hover */
+.hero-location:hover .location-icon {
+  transform: scale(1.1);
+}
+
+.location-text {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 /* Título principal H1 */
 .hero-title {
   font-family: var(--font-title);
@@ -1428,3 +1475,4 @@ ul {
     justify-content: center;
   }
 }
+
