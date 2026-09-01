@@ -1570,3 +1570,83 @@ ul {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* ==============================================
+   SECCIÓN: QUÉ ES CLM DIGITAL
+   ============================================== */
+.about-clm-section {
+  /* Fondo oscuro similar a la imagen aportada */
+  background-color: #0B1320; 
+  padding: 3rem 1.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.about-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+}
+
+.about-logo {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 200px; /* Tamaño del logo en móvil */
+}
+
+.about-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text p {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--c-white); /* Texto blanco para contrastar con fondo oscuro */
+  margin-bottom: 0.5rem;
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.7); /* El último texto con un poco de opacidad */
+}
+
+/* Resaltamos la temática del año en los colores corporativos */
+.about-text strong {
+  color: var(--c-ice-blue); 
+  font-weight: 600;
+}
+
+/* --- Adaptación para Tablets y Escritorio (Pantallas grandes) --- */
+@media (min-width: 768px) {
+  .about-clm-section {
+    padding: 5rem 2rem;
+  }
+  
+  .about-container {
+    flex-direction: row;
+    text-align: left;
+    gap: 4rem;
+  }
+
+  .about-logo {
+    max-width: 250px;
+    /* La línea separadora sutil que divide logo y texto */
+    border-right: 2px solid rgba(190, 229, 239, 0.15);
+    padding-right: 4rem;
+  }
+  
+  .about-text p {
+    font-size: 1.25rem; /* Letra un poco más grande en PC */
+  }
+}
