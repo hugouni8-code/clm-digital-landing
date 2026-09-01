@@ -1476,3 +1476,76 @@ ul {
   }
 }
 
+/* ==============================================
+   ACTUALIZACIÓN: EDICIÓN DESTACADA (Superpuesta)
+   ============================================== */
+.card-featured {
+  grid-column: 1 / -1; /* Ocupa toda la fila disponible */
+  position: relative;
+  z-index: 10;         /* La coloca por encima de las demás */
+  transform: scale(1.03); /* La hace ligeramente más grande */
+  margin-bottom: -3.5rem; /* Efecto de superposición sobre las de abajo */
+  border: 2px solid var(--c-orange);
+  box-shadow: 0 30px 60px rgba(18, 40, 52, 0.6), 0 10px 20px rgba(173, 55, 1, 0.2);
+}
+
+/* En Desktop (pantallas grandes), hacemos la tarjeta horizontal para que destaque más */
+@media (min-width: 768px) {
+  .card-featured article {
+    flex-direction: row;
+  }
+  .card-featured .card-image-wrap {
+    width: 55%;
+    height: 100%;
+    border-radius: var(--radius-card) 0 0 var(--radius-card);
+  }
+  .card-featured .card-body {
+    width: 45%;
+    justify-content: center;
+    padding: 3rem;
+  }
+}
+
+/* ==============================================
+   ACTUALIZACIÓN: NUEVOS PONENTES (Tier Hero + Bio)
+   ============================================== */
+.speakers-grid-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .speakers-grid-hero {
+    grid-template-columns: 1fr 1fr; /* Dos columnas grandes en PC */
+  }
+}
+
+/* Ajustes para la biografía dentro de la tarjeta */
+.speaker-bio {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(54, 120, 155, 0.2);
+  text-align: left;
+}
+
+.speaker-bio p {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--c-slate);
+  margin-bottom: 1rem;
+}
+
+.speaker-bio p:last-child {
+  margin-bottom: 0;
+}
+
+/* Sobrescribir comportamiento ancho de los anchor hero */
+.speakers-tier.tier-hero .speaker-anchor .speaker-role {
+  max-width: 100%; /* Para que el texto de su cargo encaje perfecto */
+}
