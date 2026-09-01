@@ -1549,3 +1549,24 @@ ul {
 .speakers-tier.tier-hero .speaker-anchor .speaker-role {
   max-width: 100%; /* Para que el texto de su cargo encaje perfecto */
 }
+
+/* 1. CORREGIR SUPERPOSICIÓN DE LA EDICIÓN DESTACADA */
+.card-featured {
+  grid-column: 1 / -1;
+  position: relative;
+  z-index: 10;
+  transform: scale(1.03);
+  /* Se cambia margin-bottom: -3.5rem; por un margen positivo */
+  margin-bottom: 2rem; 
+  border: 2px solid var(--c-orange);
+  box-shadow: 0 30px 60px rgba(18, 40, 52, 0.6), 0 10px 20px rgba(173, 55, 1, 0.2);
+}
+
+/* 2. CENTRAR LAS 3 TARJETAS RESTANTES EN ESCRITORIO */
+/* Busca esta media query en tu CSS y actualízala, o pégala al final del archivo */
+@media (min-width: 1200px) {
+  .cards-grid {
+    /* Cambiamos de repeat(4, 1fr) a repeat(3, 1fr) para que llenen todo el ancho sin dejar huecos */
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
