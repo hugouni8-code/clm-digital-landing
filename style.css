@@ -1650,3 +1650,128 @@ ul {
     font-size: 1.25rem; /* Letra un poco más grande en PC */
   }
 }
+
+/* ==============================================
+   SECCIÓN: EBORATIC
+   ============================================== */
+.eboratic-section {
+  background-color: var(--c-navy); 
+  padding: var(--sp-xl) var(--sp-md);
+  position: relative;
+  /* Borde superior sutil para separar suavemente de la sección anterior */
+  border-top: 1px solid rgba(190, 229, 239, 0.05);
+}
+
+.eboratic-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Forzamos los textos del header para que destaquen sobre el fondo oscuro */
+.eboratic-header .section-title {
+  color: var(--c-white);
+}
+
+.eboratic-header .section-desc {
+  color: var(--c-ice-blue);
+}
+
+/* Tarjeta contenedora de la info */
+.eboratic-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 3rem;
+  background: rgba(190, 229, 239, 0.03); /* Efecto cristal muy leve */
+  border: 1px solid rgba(190, 229, 239, 0.1);
+  border-radius: var(--radius-card);
+  padding: 2.5rem 1.5rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.eboratic-content:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.eboratic-logo-wrap {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 180px; /* Tamaño controlado en móvil */
+}
+
+.eboratic-logo {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* Filtro para que el logo encaje mejor con el estilo si no es blanco del todo */
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); 
+}
+
+.eboratic-text {
+  flex: 1;
+  text-align: left;
+}
+
+.eboratic-text p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--c-gray-light2);
+  margin-bottom: 1.25rem;
+}
+
+.eboratic-text strong {
+  color: var(--c-white);
+  font-weight: 600;
+}
+
+.eboratic-text em {
+  color: var(--c-orange);
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* Botón estilizado hacia su web */
+.eboratic-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1.8rem;
+  background: var(--c-orange);
+  color: var(--c-white);
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  border-radius: 50px;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.eboratic-btn:hover {
+  background: var(--c-ice-blue);
+  color: var(--c-navy);
+  transform: translateY(-2px);
+}
+
+/* --- Adaptación para Escritorio --- */
+@media (min-width: 768px) {
+  .eboratic-content {
+    flex-direction: row;
+    padding: 4rem;
+    gap: 4rem;
+  }
+  
+  .eboratic-logo-wrap {
+    max-width: 220px;
+    border-right: 1px solid rgba(190, 229, 239, 0.15);
+    padding-right: 4rem;
+  }
+  
+  .eboratic-text p {
+    font-size: 1.1rem;
+  }
+}
