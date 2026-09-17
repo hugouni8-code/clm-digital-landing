@@ -1218,6 +1218,153 @@ ul {
   animation: pulse-soft 3s ease-in-out infinite;
 }
 
+/* ==========================================================================
+   SECCIÓN PATROCINADORES (Arcos y Cuadrículas)
+   ========================================================================== */
+.sponsors-section {
+  position: relative;
+  /* Fondo azul clarito de la paleta CLM-Digital */
+  background: linear-gradient(180deg, var(--c-ice-blue) 0%, var(--c-pale-blue) 100%);
+  padding: var(--sp-xl) var(--sp-md);
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Arcos oscuros (color navy del fondo general) */
+.sponsors-arc-top,
+.sponsors-arc-bottom {
+  position: absolute;
+  left: -10%; /* Más ancho que la pantalla para que la curva sea muy suave */
+  width: 120%;
+  height: 90px;
+  background: var(--c-navy);
+  z-index: 1;
+}
+
+.sponsors-arc-top {
+  top: -45px;
+  border-radius: 0 0 50% 50%;
+}
+
+.sponsors-arc-bottom {
+  bottom: -45px;
+  border-radius: 50% 50% 0 0;
+}
+
+.sponsors-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* La cuadrícula que organiza a los patrocinadores */
+.sponsors-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center; 
+  justify-content: center; /* Todo centrado */
+  margin-top: var(--sp-md);
+}
+
+/* ── ESTILO DE LA TARJETA BASE ── */
+.sponsor-card {
+  background: var(--c-white);
+  border: 1px solid rgba(54, 120, 155, 0.2); /* Borde sutil azulado */
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  box-shadow: 0 10px 28px rgba(18, 40, 52, 0.08);
+}
+
+.sponsor-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(18, 40, 52, 0.16);
+  border-color: var(--c-orange);
+}
+
+/* Título (Nombre de la empresa) */
+.sponsor-name {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--c-navy);
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+/* Caja interior del logo */
+.sponsor-logo-box {
+  width: 100%;
+  background: var(--c-gray-light2); /* Fondo levemente gris para contraste */
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  flex-grow: 1; /* Empuja para ocupar el espacio sobrante */
+}
+
+/* Efecto elegante: logo en blanco y negro, a color al hacer hover */
+.sponsor-logo-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.7); 
+  transition: filter var(--transition);
+}
+
+.sponsor-card:hover .sponsor-logo-box img {
+  filter: grayscale(0%) opacity(1);
+}
+
+/* ── VARIANTES DE TAMAÑO (Lo que pediste) ── */
+
+/* 1. El patrocinador común (Cuadrado perfecto) */
+.sponsor-regular {
+  width: 240px;
+  aspect-ratio: 1 / 1; 
+}
+
+/* 2. El patrocinador principal (Rectángulo alargado vertical) */
+.sponsor-main {
+  width: 320px;
+  aspect-ratio: 3 / 4; 
+  border: 2px solid var(--c-blue-mid);
+}
+
+.sponsor-main .sponsor-name {
+  font-size: 1.15rem;
+  color: var(--c-orange); /* Resaltamos el nombre con el naranja del tema */
+}
+
+.sponsor-main .sponsor-logo-box {
+  background: var(--c-white);
+  border: 1px solid rgba(54, 120, 155, 0.15);
+}
+
+/* ── AJUSTES MÓVILES PARA LOS ARCOS ── */
+@media (max-width: 768px) {
+  .sponsors-arc-top, .sponsors-arc-bottom {
+    height: 50px;
+    top: -25px;
+  }
+  .sponsors-arc-bottom { 
+    top: auto;
+    bottom: -25px; 
+  }
+  .sponsor-main, .sponsor-regular {
+    width: 100%;
+    max-width: 300px;
+  }
+}
 
 /* ==============================================
    11. RESPONSIVE: BREAKPOINTS ADICIONALES
