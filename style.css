@@ -1294,7 +1294,8 @@ ul {
   font-family: var(--font-title);
   font-size: 1rem;
   font-weight: 700;
-  color: var(--c-navy);
+  /* CAMBIO: Color azul claro/medio de tu paleta */
+  color: var(--c-blue-mid); 
   margin-bottom: 1rem;
   width: 100%;
 }
@@ -1302,38 +1303,35 @@ ul {
 /* Caja interior del logo */
 .sponsor-logo-box {
   width: 100%;
-  background: var(--c-gray-light2); /* Fondo levemente gris para contraste */
+  background: var(--c-gray-light2);
   border: 1px solid rgba(0,0,0,0.05);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  flex-grow: 1; /* Empuja para ocupar el espacio sobrante */
+  flex-grow: 1; 
 }
 
-/* Efecto elegante: logo en blanco y negro, a color al hacer hover */
+/* CAMBIO: Logos a todo color por defecto sin filtros grises */
 .sponsor-logo-box img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  filter: grayscale(100%) opacity(0.7); 
-  transition: filter var(--transition);
+  transition: transform var(--transition);
 }
 
+/* Pequeño efecto de zoom al pasar el ratón (ya que quitamos el efecto del color) */
 .sponsor-card:hover .sponsor-logo-box img {
-  filter: grayscale(0%) opacity(1);
+  transform: scale(1.05);
 }
 
-/* ── VARIANTES DE TAMAÑO (Lo que pediste) ── */
-
-/* 1. El patrocinador común (Cuadrado perfecto) */
+/* ── VARIANTES DE TAMAÑO ── */
 .sponsor-regular {
   width: 240px;
   aspect-ratio: 1 / 1; 
 }
 
-/* 2. El patrocinador principal (Rectángulo alargado vertical) */
 .sponsor-main {
   width: 320px;
   aspect-ratio: 3 / 4; 
@@ -1342,7 +1340,8 @@ ul {
 
 .sponsor-main .sponsor-name {
   font-size: 1.15rem;
-  color: var(--c-orange); /* Resaltamos el nombre con el naranja del tema */
+  /* CAMBIO: Un azul un poco más fuerte/oscuro para destacar al patrocinador principal */
+  color: var(--c-blue-dark); 
 }
 
 .sponsor-main .sponsor-logo-box {
@@ -1896,5 +1895,69 @@ ul {
   
   .eboratic-text p {
     font-size: 1.1rem;
+  }
+}
+
+/* ==========================================================================
+   CORRECCIONES RESPONSIVE: MENÚ DESLIZABLE Y TÍTULOS LARGOS
+   ========================================================================== */
+
+/* 1. Evitar que el título PATROCINADORES se corte en móviles (Versión estética) */
+@media (max-width: 600px) {
+  .section-title {
+    /* Reducimos el tamaño mínimo a 1.05rem y el crecimiento (vw) para que quepa la palabra entera */
+    font-size: clamp(1.05rem, 8vw, 2rem) !important;
+    
+    /* Prohibimos explícitamente al navegador que rompa las palabras a la mitad */
+    word-wrap: normal !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important; 
+  }
+}
+
+/* 2. Hacer la barra de navegación deslizable con el dedo en móviles */
+.site-header {
+  max-width: 100vw;
+  overflow: hidden; /* Evita que el menú expanda la página hacia los lados */
+}
+
+.site-nav {
+  max-width: 100%;
+  overflow-x: auto; /* Permite scroll horizontal */
+  
+  /* Ocultar la barra de scroll visual para que quede transparente y elegante */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.site-nav::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Móviles */
+}
+
+.nav-list {
+  white-space: nowrap; /* Obliga a que todos los enlaces se queden en una sola línea horizontal */
+}
+
+/* ==========================================================================
+   FIX DEFINITIVO V3: TÍTULO PATROCINADORES EN MÓVIL 
+   ========================================================================== */
+@media (max-width: 600px) {
+  /* 1. Quitamos los márgenes laterales casi por completo para dar todo el ancho a la palabra */
+  .sponsors-section {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  /* 2. Matemáticas puras: 5.5vw * 14 letras = 77% de la pantalla. ¡Cabe 100% seguro! */
+  #sponsors-heading {
+    font-size: 5.5vw !important; 
+    letter-spacing: -0.02em !important;
+    
+    /* Evita cortes a mitad de palabra */
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    white-space: normal !important;
+    hyphens: none !important;
   }
 }
