@@ -1259,28 +1259,108 @@ ul {
   text-align: center;
 }
 
-/* La cuadrícula que organiza a los patrocinadores */
+/* La cuadrícula centralizada y con un ancho máximo elegante */
 .sponsors-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  align-items: center; 
-  justify-content: center; /* Todo centrado */
+  align-items: stretch; 
+  justify-content: center;
   margin-top: var(--sp-md);
+  width: 100%;
+  max-width: 1100px; /* Evita que en monitores gigantes se estire al infinito */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── NUEVAS VARIANTES DE TAMAÑO Y TEXTO (Más anchas) ── */
+
+.sponsor-desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--c-navy) !important; 
+  font-weight: 500;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+  flex-grow: 1; 
+}
+
+/* 1. El patrocinador principal (La Junta) - Renglón único */
+.sponsor-main {
+  /* TRUCO CLAVE: Obliga a esta tarjeta a ocupar el 100% de la fila, empujando al resto abajo */
+  flex: 0 0 100%; 
+  max-width: 850px; /* Tarjeta muy ancha para que el texto se lea de seguido en 2-3 líneas */
+  border: 2px solid var(--c-blue-mid);
+  padding: 2.5rem; /* Un poco más de espacio interior para que respire */
+  margin-bottom: 2rem;
+}
+
+.sponsor-main .sponsor-name {
+  font-size: 1.3rem;
+  color: var(--c-blue-dark); 
+}
+
+.sponsor-main .sponsor-logo-box {
+  height: 200px;
+  flex-grow: 0;
+  background: var(--c-white);
+  border: 1px solid rgba(54, 120, 155, 0.15);
+}
+
+/* 2. Los patrocinadores comunes - Dos por renglón */
+.sponsor-regular {
+  /* TRUCO CLAVE: 50% del ancho de la pantalla menos el espacio (gap) entre ellas */
+  flex: 0 0 calc(50% - 1rem); 
+  min-width: 320px; /* En móviles, al no caber dos, se pondrán de una en una automáticamente */
+  max-width: 500px; /* Tarjetas mucho más anchas que antes */
+  display: flex;
+  flex-direction: column;
+}
+
+.sponsor-regular .sponsor-logo-box {
+  height: 160px;
+  flex-grow: 0;
+}   
+/* ── CONTENEDOR DE LOGO: evita que la imagen se deforme o desborde ── */
+.sponsor-logo-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* nunca deja que el logo se salga de su caja */
+  width: 100%;
+  position: relative;
+}
+
+.sponsor-logo-box img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* respeta proporciones, nunca estira ni recorta el logo */
+  transition: transform var(--transition);
+}
+
+.sponsor-card:hover .sponsor-logo-box img {
+  transform: scale(1.05);
 }
 
 /* ── ESTILO DE LA TARJETA BASE ── */
 .sponsor-card {
+  position: relative;
   background: var(--c-white);
-  border: 1px solid rgba(54, 120, 155, 0.2); /* Borde sutil azulado */
+  border: 1px solid rgba(54, 120, 155, 0.2); 
   border-radius: var(--radius-card);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  /* Alineamos el contenido desde arriba para evitar huecos extraños */
+  justify-content: flex-start; 
   transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   box-shadow: 0 10px 28px rgba(18, 40, 52, 0.08);
+  height: max-content; /* FIX: Esto elimina el hueco gigante en blanco por debajo */
 }
 
 .sponsor-card:hover {
@@ -1289,64 +1369,128 @@ ul {
   border-color: var(--c-orange);
 }
 
-/* Título (Nombre de la empresa) */
-.sponsor-name {
-  font-family: var(--font-title);
-  font-size: 1rem;
-  font-weight: 700;
-  /* CAMBIO: Color azul claro/medio de tu paleta */
-  color: var(--c-blue-mid); 
-  margin-bottom: 1rem;
-  width: 100%;
+/* Franja superior de acento, en línea con el resto del sitio (speaker-item, etc.) */
+.sponsor-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 4px;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(90deg, var(--c-orange), var(--c-blue-mid));
+  opacity: 0;
+  transition: opacity var(--transition), width var(--transition);
 }
 
-/* Caja interior del logo */
-.sponsor-logo-box {
+.sponsor-card:hover::before {
+  opacity: 1;
+  width: 70%;
+}
+
+/* Kicker discreto sobre el nombre de los patrocinadores regulares */
+.sponsor-regular .sponsor-name::before {
+  content: "Patrocinador";
+  display: block;
+  font-family: var(--font-accent);
+  font-weight: 300;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--c-blue-mid);
+  opacity: 0.7;
+  margin-bottom: 0.35rem;
+}
+
+/* ── DISEÑO DE LA JUNTA (Sponsor Main) ── */
+.sponsor-main {
+  flex: 0 0 100%; 
+  max-width: 850px; 
+  padding: 3rem 2.5rem;
+  border: 2px solid var(--c-orange); /* Borde naranja corporativo */
+  margin-bottom: 2rem;
+  /* Fondo premium: un degradado radial muy suave de blanco a azul hielo */
+  background: radial-gradient(circle at top, var(--c-white) 0%, rgba(190, 229, 239, 0.15) 100%);
+  box-shadow: 0 15px 35px rgba(18, 40, 52, 0.12);
+}
+
+.sponsor-main .sponsor-logo-box {
+  height: 200px;
   width: 100%;
-  background: var(--c-gray-light2);
+  flex-grow: 0;
+  background: transparent;
+  border: none; /* Quitamos el borde gris para que se funda con la tarjeta */
+}
+
+/* Etiqueta de "Patrocinador Principal" */
+.sponsor-badge {
+  background-color: var(--c-orange);
+  color: var(--c-white);
+  font-family: var(--font-accent);
+  font-size: 1.05rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.35rem 1.2rem;
+  border-radius: 50px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 10px rgba(173, 55, 1, 0.3);
+}
+
+/* Línea separadora decorativa */
+.sponsor-divider {
+  width: 60px;
+  height: 3px;
+  background: var(--c-orange);
+  margin: 1rem auto 1.5rem auto;
+  border-radius: 2px;
+}
+
+/* ── DISEÑO TARJETAS REGULARES Y TEXTOS ── */
+.sponsor-regular {
+  flex: 0 0 calc(50% - 1rem); 
+  min-width: 320px; 
+  max-width: 500px; 
+}
+
+.sponsor-regular .sponsor-logo-box {
+  height: 160px;
+  width: 100%;
+  flex-grow: 0;
   border: 1px solid rgba(0,0,0,0.05);
+  background: var(--c-gray-light2);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  flex-grow: 1; 
 }
 
-/* CAMBIO: Logos a todo color por defecto sin filtros grises */
-.sponsor-logo-box img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  transition: transform var(--transition);
-}
-
-/* Pequeño efecto de zoom al pasar el ratón (ya que quitamos el efecto del color) */
-.sponsor-card:hover .sponsor-logo-box img {
-  transform: scale(1.05);
-}
-
-/* ── VARIANTES DE TAMAÑO ── */
-.sponsor-regular {
-  width: 240px;
-  aspect-ratio: 1 / 1; 
-}
-
-.sponsor-main {
-  width: 320px;
-  aspect-ratio: 3 / 4; 
-  border: 2px solid var(--c-blue-mid);
+/* Nombres (Ahora debajo del logo) */
+.sponsor-name {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--c-blue-mid); 
+  margin-top: 1.5rem; /* Empuja hacia abajo desde el logo */
+  margin-bottom: 0.5rem;
+  width: 100%;
 }
 
 .sponsor-main .sponsor-name {
-  font-size: 1.15rem;
-  /* CAMBIO: Un azul un poco más fuerte/oscuro para destacar al patrocinador principal */
+  font-size: 1.5rem;
   color: var(--c-blue-dark); 
+  margin-top: 1rem;
 }
 
-.sponsor-main .sponsor-logo-box {
-  background: var(--c-white);
-  border: 1px solid rgba(54, 120, 155, 0.15);
+.sponsor-desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--c-navy) !important; 
+  font-weight: 500;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
 }
 
 /* ── AJUSTES MÓVILES PARA LOS ARCOS ── */
@@ -1960,4 +2104,4 @@ ul {
     white-space: normal !important;
     hyphens: none !important;
   }
-}
+} 
