@@ -2339,3 +2339,352 @@ ul {
   .timeline-item.reveal { opacity: 1; transform: none; transition: none; }
   .timeline-card, .timeline-dot { transition: none; }
 }
+
+/* ==========================================================================
+   SECCIÓN: PRÓXIMOS PONENTES
+   Añadir al FINAL de style.css.
+   - Solo usa las variables del sistema de diseño (:root).
+   - Todas las clases llevan prefijo .next-speakers-* / .nspeaker-* para no
+     chocar con .speaker-item, .speaker-avatar-wrap, etc. de "Ponentes anteriores".
+   - Detalle de diseño: marco hexagonal con anillo "escáner" (conic-gradient)
+     que gira y barre la foto al pasar el cursor o enfocar con teclado.
+   ========================================================================== */
+
+/* Ángulo animable del anillo (si el navegador no soporta @property,
+   el anillo simplemente se queda estático: degradación segura) */
+@property --nspeaker-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* ---- Contenedor de sección (mobile-first) ---- */
+.next-speakers-section {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    var(--c-ice-blue) 0%,
+    color-mix(in srgb, var(--c-ice-blue) 35%, var(--c-white)) 100%
+  );
+  padding: var(--sp-xl) var(--sp-sm);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Malla tipo circuito, desvanecida hacia los bordes */
+.next-speakers-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--c-blue-mid) 14%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--c-blue-mid) 14%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, var(--c-navy) 0%, transparent 70%);
+          mask-image: radial-gradient(ellipse at 50% 45%, var(--c-navy) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Halo de color detrás de las tarjetas */
+.next-speakers-section::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: 80vw;
+  height: 80vw;
+  max-width: 760px;
+  max-height: 760px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--c-white) 85%, transparent) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.next-speakers-container {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Cabecera sobre fondo claro (hereda los colores base de .section-*) */
+.next-speakers-header .section-kicker { color: var(--c-blue-mid); }
+.next-speakers-header .section-title  { color: var(--c-navy); }
+.next-speakers-header .section-desc   { color: var(--c-blue-dark); }
+
+/* ---- Rejilla: 1 columna en móvil ---- */
+.next-speakers-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-md);
+  list-style: none;
+}
+
+.next-speakers-item {
+  display: flex;
+}
+
+/* ---- Tarjeta (cristal claro) ---- */
+.nspeaker-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: var(--sp-md) var(--sp-sm) var(--sp-md);
+  text-align: center;
+  background: color-mix(in srgb, var(--c-white) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-white) 90%, transparent);
+  border-radius: var(--radius-card);
+  -webkit-backdrop-filter: blur(14px);
+          backdrop-filter: blur(14px);
+  box-shadow: 0 14px 32px color-mix(in srgb, var(--c-navy) 12%, transparent);
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+/* Línea de acento superior */
+.nspeaker-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--sp-md);
+  right: var(--sp-md);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--c-orange), transparent);
+  opacity: 0.8;
+}
+
+.nspeaker-card:hover,
+.nspeaker-card:focus-within {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--c-orange) 55%, transparent);
+  box-shadow: 0 22px 44px color-mix(in srgb, var(--c-navy) 18%, transparent),
+              0 0 28px color-mix(in srgb, var(--c-orange) 16%, transparent);
+}
+
+/* ==========================================================================
+   DETALLE DE DISEÑO: marco hexagonal + anillo escáner
+   ========================================================================== */
+.nspeaker-avatar-wrap {
+  position: relative;
+  width: 11rem;
+  aspect-ratio: 1;
+  margin-bottom: var(--sp-sm);
+  filter: drop-shadow(0 10px 22px color-mix(in srgb, var(--c-blue-dark) 35%, transparent));
+  transition: filter var(--transition), transform var(--transition);
+}
+
+/* Anillo degradado cónico recortado en hexágono */
+.nspeaker-ring {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+  background: conic-gradient(
+    from var(--nspeaker-angle),
+    var(--c-orange),
+    var(--c-blue-mid),
+    var(--c-ice-blue),
+    var(--c-blue-dark),
+    var(--c-orange)
+  );
+}
+
+/* Marco interior con la foto (o el placeholder) */
+.nspeaker-hex {
+  position: absolute;
+  inset: 4px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  clip-path: polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+  background: linear-gradient(145deg, var(--c-blue-dark) 0%, var(--c-navy) 100%);
+}
+
+/* Placeholder: iniciales hasta que haya foto */
+.nspeaker-hex::after {
+  content: attr(data-initials);
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: 2.6rem;
+  letter-spacing: 0.04em;
+  color: var(--c-ice-blue);
+}
+
+/* Línea de escaneo (oculta en reposo) */
+.nspeaker-hex::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -40%;
+  height: 40%;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--c-ice-blue) 55%, transparent) 90%,
+    var(--c-ice-blue) 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nspeaker-img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Sin foto: oculta el icono de imagen rota y deja ver el degradado + iniciales */
+.nspeaker-img[src=""] {
+  display: none;
+}
+
+/* Hover / foco: el anillo gira y el escáner barre la foto */
+.nspeaker-card:hover .nspeaker-avatar-wrap,
+.nspeaker-card:focus-within .nspeaker-avatar-wrap {
+  transform: scale(1.04);
+  filter: drop-shadow(0 12px 28px color-mix(in srgb, var(--c-orange) 35%, transparent));
+}
+
+.nspeaker-card:hover .nspeaker-ring,
+.nspeaker-card:focus-within .nspeaker-ring {
+  animation: nspeaker-spin 3s linear infinite;
+}
+
+.nspeaker-card:hover .nspeaker-hex::before,
+.nspeaker-card:focus-within .nspeaker-hex::before {
+  animation: nspeaker-scan 1.6s ease-in-out infinite;
+}
+
+@keyframes nspeaker-spin {
+  to { --nspeaker-angle: 360deg; }
+}
+
+@keyframes nspeaker-scan {
+  0%   { top: -40%; opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ---- Texto ---- */
+.nspeaker-header {
+  margin-bottom: var(--sp-sm);
+}
+
+.nspeaker-name {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  color: var(--c-navy);
+  margin-bottom: 0.4rem;
+}
+
+.nspeaker-role {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: var(--c-blue-dark);
+}
+
+.nspeaker-bio {
+  flex-grow: 1;               /* empuja el enlace al fondo y alinea las tarjetas */
+  max-width: 34ch;
+  margin-bottom: var(--sp-md);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--c-slate);
+}
+
+/* ---- Enlace a LinkedIn ---- */
+.nspeaker-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--c-blue-dark);
+  border: 1px solid color-mix(in srgb, var(--c-blue-mid) 55%, transparent);
+  border-radius: 999px;
+  transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.nspeaker-link-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: currentColor;
+}
+
+.nspeaker-link:hover,
+.nspeaker-link:focus-visible {
+  background-color: var(--c-orange);
+  border-color: var(--c-orange);
+  color: var(--c-white);
+}
+
+/* ==========================================================================
+   ESCRITORIO: dos columnas alineadas
+   ========================================================================== */
+@media (min-width: 768px) {
+  .next-speakers-section {
+    padding: var(--sp-xl) var(--sp-md);
+  }
+
+  .next-speakers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-md);
+    align-items: stretch;
+  }
+
+  .nspeaker-card {
+    padding: var(--sp-md) var(--sp-md) var(--sp-md);
+  }
+
+  .nspeaker-avatar-wrap {
+    width: 13rem;
+  }
+
+  .nspeaker-name {
+    font-size: 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   ACCESIBILIDAD: sin animaciones si el usuario lo pide
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .nspeaker-card,
+  .nspeaker-avatar-wrap,
+  .nspeaker-link {
+    transition: none;
+  }
+
+  .nspeaker-card:hover,
+  .nspeaker-card:focus-within {
+    transform: none;
+  }
+
+  .nspeaker-card:hover .nspeaker-avatar-wrap,
+  .nspeaker-card:focus-within .nspeaker-avatar-wrap {
+    transform: none;
+  }
+
+  .nspeaker-card:hover .nspeaker-ring,
+  .nspeaker-card:focus-within .nspeaker-ring,
+  .nspeaker-card:hover .nspeaker-hex::before,
+  .nspeaker-card:focus-within .nspeaker-hex::before {
+    animation: none;
+  }
+}
