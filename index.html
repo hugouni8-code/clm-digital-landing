@@ -17,9 +17,111 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="style.css?v=3" />
+  <link rel="stylesheet" href="style.css?v=4" />
 </head>
 <body>
+
+  <!-- =============================================
+       SPRITE DE MOTIVOS CHINOS (para los divisores de bambú)
+       Se pintan con .mf / .mfs (relleno) y .md / .mds (detalle)
+  ============================================= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <!-- Farolillo (cuelga) -->
+    <symbol id="m-lantern" viewBox="0 0 60 112">
+      <path class="mfs" d="M30 0V13" stroke-width="2.2"/>
+      <rect class="mf" x="17" y="12" width="26" height="7" rx="2"/>
+      <ellipse class="mf" cx="30" cy="42" rx="25" ry="23"/>
+      <g class="mds" stroke-width="2">
+        <path d="M30 19.5V64.5"/>
+        <path d="M30 19.5C14 28 14 56 30 64.5"/>
+        <path d="M30 19.5C46 28 46 56 30 64.5"/>
+      </g>
+      <rect class="mf" x="17" y="64" width="26" height="7" rx="2"/>
+      <path class="mfs" d="M30 71V80" stroke-width="2"/>
+      <rect class="mf" x="26.5" y="78" width="7" height="12" rx="1.5"/>
+      <path class="mfs" d="M24 90V108M27 90V111M30 90V112M33 90V111M36 90V108" stroke-width="2"/>
+    </symbol>
+    <!-- Nudo chino (cuelga) -->
+    <symbol id="m-knot" viewBox="0 0 56 112">
+      <path class="mfs" d="M28 0V9" stroke-width="2.2"/>
+      <circle class="mf" cx="28" cy="13" r="4.5"/>
+      <g class="mfs" stroke-width="4.5" stroke-linejoin="round">
+        <rect x="13" y="21" width="30" height="30" rx="9" transform="rotate(45 28 36)"/>
+        <rect x="19.5" y="27.5" width="17" height="17" rx="5" transform="rotate(45 28 36)"/>
+      </g>
+      <rect class="mf" x="24" y="58" width="8" height="7" rx="1.5"/>
+      <path class="mfs" d="M21 65V108M25 65V111M28 65V112M31 65V111M35 65V108" stroke-width="2.4"/>
+    </symbol>
+    <!-- Moneda de la fortuna (cuelga) -->
+    <symbol id="m-coin" viewBox="0 0 56 100">
+      <path class="mfs" d="M28 0V12" stroke-width="2.2"/>
+      <path class="mf" fill-rule="evenodd" d="M28 14a23 23 0 1 0 0 46a23 23 0 1 0 0-46ZM19 28h18v18H19Z"/>
+      <circle class="mds" cx="28" cy="37" r="18.5" stroke-width="1.6"/>
+      <rect class="mf" x="24.5" y="60" width="7" height="6" rx="1.5"/>
+      <path class="mfs" d="M22 66V92M25 66V96M28 66V98M31 66V96M34 66V92" stroke-width="2.2"/>
+    </symbol>
+    <!-- Farolillo segmentado (cuelga) -->
+    <symbol id="m-strip" viewBox="0 0 44 112">
+      <path class="mfs" d="M22 0V10" stroke-width="2.2"/>
+      <rect class="mf" x="12" y="9" width="20" height="6" rx="2"/>
+      <rect class="mf" x="9"  y="16" width="26" height="13" rx="2.5"/>
+      <rect class="mf" x="6"  y="30" width="32" height="13" rx="2.5"/>
+      <rect class="mf" x="9"  y="44" width="26" height="13" rx="2.5"/>
+      <rect class="mf" x="6"  y="58" width="32" height="13" rx="2.5"/>
+      <rect class="mf" x="9"  y="72" width="26" height="9"  rx="2.5"/>
+      <g class="mds" stroke-width="1.6"><path d="M13 22.5H31M10 36.5H34M13 50.5H31M10 64.5H34"/></g>
+      <path class="mfs" d="M22 81V88" stroke-width="2"/>
+      <rect class="mf" x="19" y="86" width="6" height="8" rx="1.5"/>
+      <path class="mfs" d="M17 94V108M20 94V111M22 94V112M24 94V111M27 94V108" stroke-width="2"/>
+    </symbol>
+    <!-- Nube auspiciosa (se apoya) -->
+    <symbol id="m-cloud" viewBox="0 0 130 56">
+      <path class="mf" d="M6 56C-2 56-2 42 10 41C6 30 18 22 27 29C28 14 48 8 56 20C62 10 82 12 84 26C96 22 108 32 102 42C114 40 122 50 112 56Z"/>
+      <g class="mds" stroke-width="3">
+        <path d="M30 44C30 36 40 34 42 40C43 45 37 47 36 43"/>
+        <path d="M62 36C62 28 72 27 74 33C75 38 69 40 68 36"/>
+        <path d="M88 47C88 41 96 41 97 46"/>
+      </g>
+    </symbol>
+    <!-- Olas (se apoyan) -->
+    <symbol id="m-waves" viewBox="0 0 120 40">
+      <g class="mfs" stroke-width="3">
+        <path d="M3 40A19 19 0 0 1 41 40M9 40A13 13 0 0 1 35 40M15 40A7 7 0 0 1 29 40"/>
+        <path d="M41 40A19 19 0 0 1 79 40M47 40A13 13 0 0 1 73 40M53 40A7 7 0 0 1 67 40"/>
+        <path d="M79 40A19 19 0 0 1 117 40M85 40A13 13 0 0 1 111 40M91 40A7 7 0 0 1 105 40"/>
+      </g>
+    </symbol>
+    <!-- Flor de ciruelo (se apoya) -->
+    <symbol id="m-blossom" viewBox="3 4 50 46">
+      <g class="mf">
+        <circle cx="28" cy="15" r="10.5"/>
+        <circle cx="40.4" cy="24" r="10.5"/>
+        <circle cx="35.6" cy="38.5" r="10.5"/>
+        <circle cx="20.4" cy="38.5" r="10.5"/>
+        <circle cx="15.6" cy="24" r="10.5"/>
+      </g>
+      <circle class="md" cx="28" cy="28" r="7"/>
+      <circle class="mf" cx="28" cy="28" r="2.6"/>
+    </symbol>
+
+    <!-- NUBES decorativas (estilo xiangyun): contorno + remolinos -->
+    <symbol id="c-1" viewBox="0 0 190 140">
+      <path class="cl-body" d="M30 100C10 98 6 74 26 68C22 44 48 30 68 42C76 22 108 20 120 40C146 36 164 56 156 78C176 84 176 108 152 112C140 124 118 124 108 114C94 126 66 124 56 110C46 116 34 112 30 100Z"/>
+      <path class="cl-line" d="M70 60C84 50 100 62 92 74C86 82 74 76 78 68M118 82C130 72 146 84 138 96C132 104 120 98 124 90"/>
+    </symbol>
+    <symbol id="c-2" viewBox="0 0 260 110">
+      <path class="cl-body" d="M20 70C4 56 14 24 44 22C60 4 96 6 104 30C120 30 134 40 134 52C150 50 170 42 196 44C220 46 240 38 252 32C246 52 226 64 200 62C176 62 164 74 142 84C120 94 96 88 90 80C70 90 36 88 20 70Z"/>
+      <path class="cl-line" d="M52 48C62 38 80 44 76 56C72 64 60 60 64 54M100 66C108 56 124 62 120 72C116 80 106 76 108 70"/>
+    </symbol>
+    <symbol id="c-3" viewBox="0 0 180 140">
+      <path class="cl-body" d="M30 70C14 56 22 34 44 36C48 16 76 12 88 26C104 12 134 20 134 40C158 38 170 62 154 76C164 96 140 112 120 104C108 122 76 122 64 106C44 116 22 98 30 70Z"/>
+      <path class="cl-line" d="M92 66C100 60 108 68 104 76C98 86 82 82 82 70C82 56 98 50 110 56C124 64 120 84 104 92"/>
+    </symbol>
+    <symbol id="c-4" viewBox="0 0 240 120">
+      <path class="cl-body" d="M8 106C38 102 52 92 62 80C58 60 78 44 94 54C100 30 134 24 148 46C166 42 182 56 176 74C196 74 218 84 230 102C200 108 110 110 8 106Z"/>
+      <path class="cl-line" d="M96 76C104 66 120 72 116 84C112 92 100 88 104 82M148 80C154 72 168 76 166 86"/>
+    </symbol>
+  </svg>
 
   <!-- =============================================
        A. HEADER + HERO SECTION (100vh)
@@ -133,6 +235,13 @@
 
   </section>
   <!-- /HERO WRAPPER -->
+  <!-- Divisor: bambú + motivo chino aleatorio -->
+  <div class="bamboo-divider bd--from-dark bd--to-dark" style="--from:var(--c-dark);--to:var(--c-dark);" aria-hidden="true">
+    <div class="bd-up"></div>
+    <div class="bd-down"></div>
+    <span class="bd-stalk"></span>
+  </div>
+
 
   <!-- =============================================
        SECCIÓN: QUÉ ES CLM DIGITAL
@@ -162,6 +271,14 @@
       </div>
     </div>
   </section>
+
+
+  <!-- Divisor: bambú + motivo chino aleatorio -->
+  <div class="bamboo-divider bd--from-dark bd--to-dark" style="--from:var(--c-dark);--to:var(--c-dark);" aria-hidden="true">
+    <div class="bd-up"></div>
+    <div class="bd-down"></div>
+    <span class="bd-stalk"></span>
+  </div>
 
   <!-- =============================================
        SECCIÓN: PROGRAMA DEL EVENTO
@@ -308,6 +425,13 @@
     })();
   </script>
   <!-- /PROGRAMA -->
+  <!-- Divisor: bambú + motivo chino aleatorio -->
+  <div class="bamboo-divider bd--from-dark bd--to-light" style="--from:var(--c-navy);--to:var(--c-paper);" aria-hidden="true">
+    <div class="bd-up"></div>
+    <div class="bd-down"></div>
+    <span class="bd-stalk"></span>
+  </div>
+
 
 
   <!-- =============================================
@@ -434,14 +558,18 @@
   </div>
 </section>
 <!-- /PRÓXIMOS PONENTES -->
+  <!-- Divisor: bambú + motivo chino aleatorio -->
+  <div class="bamboo-divider bd--from-light bd--to-light" style="--from:var(--c-paper);--to:var(--c-paper-2);" aria-hidden="true">
+    <div class="bd-up"></div>
+    <div class="bd-down"></div>
+    <span class="bd-stalk"></span>
+  </div>
+
 
  <!-- ══════════════════════════════════════════════════
        PATROCINADORES
        ══════════════════════════════════════════════════ -->
   <section class="sponsors-section" id="patrocinadores" aria-labelledby="sponsors-heading">
-    
-    <!-- Arco superior oscuro (Luna/Semicírculo) -->
-    <div class="sponsors-arc-top" aria-hidden="true"></div>
 
     <div class="sponsors-content">
       <header class="section-header">
@@ -528,17 +656,20 @@
 
       </div>
     </div>
-
-    <!-- Arco inferior oscuro -->
-    <div class="sponsors-arc-bottom" aria-hidden="true"></div>
     
   </section>
+
+  <!-- Divisor: bambú + motivo chino aleatorio -->
+  <div class="bamboo-divider bd--from-light bd--to-light" style="--from:var(--c-paper-2);--to:var(--c-paper);" aria-hidden="true">
+    <div class="bd-up"></div>
+    <div class="bd-down"></div>
+    <span class="bd-stalk"></span>
+  </div>
+
   <!-- =============================================
        B. SECCIÓN EDICIONES ANTERIORES
   ============================================= -->
   <section class="editions-section" id="ediciones" aria-labelledby="editions-heading">
-    <!-- Decoración superior: borde ondulado -->
-    <div class="section-wave-top" aria-hidden="true"></div>
 
     <div class="editions-container">
       <header class="section-header">
@@ -632,9 +763,14 @@
     </div>
   </section>
   <!-- /EDICIONES ANTERIORES -->
+  <!-- Divisor: bambú + motivo chino aleatorio -->
+  <div class="bamboo-divider bd--from-light bd--to-light" style="--from:var(--c-paper);--to:var(--c-paper-2);" aria-hidden="true">
+    <div class="bd-up"></div>
+    <div class="bd-down"></div>
+    <span class="bd-stalk"></span>
+  </div>
+
   <section class="speakers-section" id="ponentes" aria-labelledby="speakers-heading">
-    
-    <div class="section-oval-divider" aria-hidden="true"></div>
 
     <div class="speakers-container">
 
@@ -740,6 +876,14 @@
     </div>
   </section>
 
+
+  <!-- Divisor: bambú + motivo chino aleatorio -->
+  <div class="bamboo-divider bd--from-light bd--to-dark" style="--from:var(--c-paper-2);--to:var(--c-navy);" aria-hidden="true">
+    <div class="bd-up"></div>
+    <div class="bd-down"></div>
+    <span class="bd-stalk"></span>
+  </div>
+
   <!-- =============================================
        SECCIÓN: EBORATIC (ORGANIZADORES)
   ============================================= -->
@@ -779,6 +923,14 @@
     </div>
   </section>
 
+
+  <!-- Divisor: bambú + motivo chino aleatorio -->
+  <div class="bamboo-divider bd--from-dark bd--to-light" style="--from:var(--c-navy);--to:var(--c-paper);" aria-hidden="true">
+    <div class="bd-up"></div>
+    <div class="bd-down"></div>
+    <span class="bd-stalk"></span>
+  </div>
+
   <!-- =============================================
        C. SECCIÓN PRÓXIMAMENTE + FOOTER
   ============================================= -->
@@ -806,29 +958,10 @@
       </div>
 
     </div>
-
-    <!-- ---- FOOTER ---- -->
-    <footer class="site-footer" role="contentinfo">
-      <nav class="footer-nav" aria-label="Navegación del pie de página">
-        <ul class="footer-links" role="list">
-          <li><a href="#" class="footer-link">Home</a></li>
-          <li><a href="#" class="footer-link">Subscribe</a></li>
-          <li><a href="#" class="footer-link">Privacy Policy</a></li>
-          <li><a href="#" class="footer-link">Accessibility Statement</a></li>
-        </ul>
-      </nav>
-      <p class="footer-copy">
-        <small>© 2026 by CLM-Digital · Built with <span aria-label="amor">♥</span> in Castilla-La Mancha</small>
-      </p>
-    </footer>
-    <!-- /FOOTER -->
-
+    
   </section>
   <!-- /PRÓXIMAMENTE -->
 
-</body>
-</html>
-</section>
   <script>
     // Fecha del evento: 29 de Octubre de 2026 a las 09:00:00
     const eventDate = new Date("Oct 29, 2026 09:00:00").getTime();
@@ -855,6 +988,135 @@
         document.querySelector(".countdown-container").innerHTML = "<h3 style='color: var(--c-ice-blue); font-family: var(--font-title);'>¡El evento ha comenzado!</h3>";
       }
     }, 1000);
+  </script>
+
+  <script>
+    // Divisores de bambú: elige un motivo chino al azar para cada uno
+    (function () {
+      var MOTIFS = [
+        { id: 'lantern',  w: 60,  h: 112, s: 0.72, side: 'down' },
+        { id: 'knot',     w: 56,  h: 112, s: 0.72, side: 'down' },
+        { id: 'coin',     w: 56,  h: 100, s: 0.76, side: 'down' },
+        { id: 'strip',    w: 44,  h: 112, s: 0.72, side: 'down' },
+        { id: 'cloud',    w: 130, h: 56,  s: 1.05, side: 'up'   },
+        { id: 'waves',    w: 120, h: 40,  s: 1.25, side: 'up'   },
+        { id: 'blossom',  w: 50,  h: 46,  s: 1.20, side: 'up'   }
+      ];
+      var NS = 'http://www.w3.org/2000/svg';
+      var used = [];
+
+      function pick(exclude) {
+        var pool = MOTIFS.filter(function (m) { return exclude.indexOf(m.id) === -1; });
+        return pool[Math.floor(Math.random() * pool.length)];
+      }
+
+      function build(m, x) {
+        var item = document.createElement('div');
+        item.className = 'bd-item';
+        item.style.left = x + '%';
+
+        var svg = document.createElementNS(NS, 'svg');
+        svg.setAttribute('class', 'bd-motif');
+        svg.setAttribute('viewBox', '0 0 ' + m.w + ' ' + m.h);
+        svg.style.height = 'calc(' + (m.h * m.s) + 'px * var(--bd-k))';
+        svg.style.aspectRatio = m.w + ' / ' + m.h;
+        if (m.side === 'down') {
+          svg.style.animationDelay = '-' + (Math.random() * 5).toFixed(2) + 's';
+          svg.style.animationDuration = (4.5 + Math.random() * 2.5).toFixed(2) + 's';
+        }
+        var use = document.createElementNS(NS, 'use');
+        use.setAttribute('href', '#m-' + m.id);
+        svg.appendChild(use);
+        item.appendChild(svg);
+        return item;
+      }
+
+      document.querySelectorAll('.bamboo-divider').forEach(function (d) {
+        var up = d.querySelector('.bd-up'), down = d.querySelector('.bd-down');
+        var stalk = d.querySelector('.bd-stalk');
+        stalk.style.setProperty('--off', Math.floor(Math.random() * 150) + 'px');
+
+        // Motivo principal (sin repetir los usados en el divisor anterior)
+        var m1 = pick(used.slice(-2));
+        var x1 = 10 + Math.random() * 80;
+        (m1.side === 'up' ? up : down).appendChild(build(m1, x1));
+        var chosen = [m1.id];
+
+        // A veces, un segundo motivo más discreto en el lado contrario
+        if (Math.random() < 0.4) {
+          var other = MOTIFS.filter(function (m) { return m.side !== m1.side && chosen.indexOf(m.id) === -1; });
+          var m2 = other[Math.floor(Math.random() * other.length)];
+          var x2;
+          do { x2 = 8 + Math.random() * 84; } while (Math.abs(x2 - x1) < 28);
+          (m2.side === 'up' ? up : down).appendChild(build(m2, x2));
+          chosen.push(m2.id);
+        }
+        used = used.concat(chosen);
+      });
+    })();
+  </script>
+
+  <script>
+    // Nubes decorativas en los márgenes de cada sección (aleatorias en cada carga)
+    (function () {
+      var NS = 'http://www.w3.org/2000/svg';
+      var SHAPES = [ { id: 'c-1', w: 190, h: 140 }, { id: 'c-2', w: 260, h: 110 },
+                     { id: 'c-3', w: 180, h: 140 }, { id: 'c-4', w: 240, h: 120 } ];
+      var SECTIONS = [
+        ['.about-clm-section', 'dark'], ['.schedule-section', 'dark'],
+        ['.next-speakers-section', 'light'], ['.sponsors-section', 'light'],
+        ['.editions-section', 'light'], ['.speakers-section', 'light'],
+        ['.eboratic-section', 'dark'], ['.coming-section', 'light']
+      ];
+      function rnd(a, b) { return a + Math.random() * (b - a); }
+
+      function paint() {
+        document.querySelectorAll('.cloud-layer').forEach(function (l) { l.remove(); });
+        var narrow = window.innerWidth < 768;
+        SECTIONS.forEach(function (s) {
+          var sec = document.querySelector(s[0]);
+          if (!sec) return;
+          sec.classList.add('has-clouds');
+          var layer = document.createElement('div');
+          layer.className = 'cloud-layer cloud-' + s[1];
+          layer.setAttribute('aria-hidden', 'true');
+          var H = sec.offsetHeight;
+          var n = Math.max(2, Math.min(6, Math.round(H / (narrow ? 700 : 520))));
+          var side = Math.random() < 0.5 ? 0 : 1;
+          var lastShape = -1;
+          for (var i = 0; i < n; i++) {
+            var k; do { k = Math.floor(Math.random() * SHAPES.length); } while (k === lastShape);
+            lastShape = k;
+            var sh = SHAPES[k];
+            var width = narrow ? rnd(90, 140) : rnd(150, 250);
+            var top = ((i + rnd(0.15, 0.85)) / n) * 100;           // repartidas en vertical
+            var off = narrow ? rnd(-35, -15) : rnd(-60, 2);        // parte fuera de pantalla
+            var el = document.createElement('div');
+            el.className = 'cloud-item';
+            el.style.top = top + '%';
+            el.style.width = width + 'px';
+            el.style[side ? 'right' : 'left'] = (off < 0 ? off + 'px' : off + '%');
+            el.style.setProperty('--flip', (Math.random() < 0.5 ? -1 : 1));
+            el.style.setProperty('--rot', rnd(-8, 8).toFixed(1) + 'deg');
+            el.style.animationDelay = '-' + rnd(0, 12).toFixed(1) + 's';
+            el.style.animationDuration = rnd(11, 18).toFixed(1) + 's';
+            var svg = document.createElementNS(NS, 'svg');
+            svg.setAttribute('viewBox', '0 0 ' + sh.w + ' ' + sh.h);
+            svg.style.aspectRatio = sh.w + ' / ' + sh.h;
+            var use = document.createElementNS(NS, 'use');
+            use.setAttribute('href', '#' + sh.id);
+            svg.appendChild(use);
+            el.appendChild(svg);
+            layer.appendChild(el);
+            side = 1 - side;                                        // alternar izquierda / derecha
+          }
+          sec.insertBefore(layer, sec.firstChild);
+        });
+      }
+      var t;
+      window.addEventListener('load', paint);
+      window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(paint, 300); });
+    })();
   </script>
 
 </body>
