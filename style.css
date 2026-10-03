@@ -2688,3 +2688,10 @@ ul {
     animation: none;
   }
 }
+
+/* Hacer que los próximos ponentes se vean en 3 columnas en pantallas grandes */
+@media (min-width: 1024px) {
+  .next-speakers-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
