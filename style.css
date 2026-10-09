@@ -1191,7 +1191,7 @@ ul {
 }
 
 /* ==========================================================================
-   SECCIÓN PATROCINADORES (Arcos y Cuadrículas)
+   SECCIÓN COLABORADORES (Arcos y Cuadrículas)
    ========================================================================== */
 .sponsors-section {
   position: relative;
@@ -1237,7 +1237,7 @@ ul {
   flex-grow: 1; 
 }
 
-/* 1. El patrocinador principal (La Junta) - Renglón único */
+/* 1. El colaborador principal (La Junta) - Renglón único */
 .sponsor-main {
   /* TRUCO CLAVE: Obliga a esta tarjeta a ocupar el 100% de la fila, empujando al resto abajo */
   flex: 0 0 100%; 
@@ -1259,7 +1259,7 @@ ul {
   border: 1px solid rgba(179, 19, 27, 0.15);
 }
 
-/* 2. Los patrocinadores comunes - Dos por renglón */
+/* 2. Los colaboradores comunes - Dos por renglón */
 .sponsor-regular {
   /* TRUCO CLAVE: 50% del ancho de la pantalla menos el espacio (gap) entre ellas */
   flex: 0 0 calc(50% - 1rem); 
@@ -1340,9 +1340,9 @@ ul {
   width: 70%;
 }
 
-/* Kicker discreto sobre el nombre de los patrocinadores regulares */
+/* Kicker discreto sobre el nombre de los colaboradores regulares */
 .sponsor-regular .sponsor-name::before {
-  content: "Patrocinador";
+  content: "Colaborador";
   display: block;
   font-family: var(--font-accent);
   font-weight: 300;
@@ -1374,7 +1374,7 @@ ul {
   border: none; /* Quitamos el borde gris para que se funda con la tarjeta */
 }
 
-/* Etiqueta de "Patrocinador Principal" */
+/* Etiqueta de "Colaborador Principal" */
 .sponsor-badge {
   background-color: var(--c-orange);
   color: var(--c-white);
@@ -1987,7 +1987,7 @@ ul {
    CORRECCIONES RESPONSIVE: MENÚ DESLIZABLE Y TÍTULOS LARGOS
    ========================================================================== */
 
-/* 1. Evitar que el título PATROCINADORES se corte en móviles (Versión estética) */
+/* 1. Evitar que el título COLABORADORES se corte en móviles (Versión estética) */
 @media (max-width: 600px) {
   .section-title {
     /* Reducimos el tamaño mínimo a 1.05rem y el crecimiento (vw) para que quepa la palabra entera */
@@ -2025,7 +2025,7 @@ ul {
 }
 
 /* ==========================================================================
-   FIX DEFINITIVO V3: TÍTULO PATROCINADORES EN MÓVIL 
+   FIX DEFINITIVO V3: TÍTULO COLABORADORES EN MÓVIL 
    ========================================================================== */
 @media (max-width: 600px) {
   /* 1. Quitamos los márgenes laterales casi por completo para dar todo el ancho a la palabra */
@@ -2049,7 +2049,7 @@ ul {
 
 /* ==========================================================================
    SECCIÓN: PROGRAMA DEL EVENTO (línea de tiempo)
-   Fondo oscuro para enlazar con "Qué es" y con el arco superior de Patrocinadores
+   Fondo oscuro para enlazar con "Qué es" y con el arco superior de Colaboradores
    ========================================================================== */
 .schedule-section {
   position: relative;
@@ -2814,7 +2814,7 @@ body { background-color: var(--c-dark); }
 
 
 /* ==============================================
-   CARRUSEL DE PATROCINADORES (parte inferior del hero)
+   CARRUSEL DE COLABORADORES (parte inferior del hero)
    Banda horizontal en bucle infinito: la pista contiene
    dos grupos idénticos y se desplaza un -50 %.
    ============================================== */
