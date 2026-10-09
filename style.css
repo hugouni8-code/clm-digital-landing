@@ -2947,3 +2947,121 @@ body { background-color: var(--c-dark); }
     display: none;
   }
 }
+
+
+/* ==============================================
+   MENÚ DESPLEGABLE EN MÓVIL / TABLET (≤ 900px)
+   La píldora completa no cabe: se sustituye por un
+   botón "Menú" en la esquina que abre un panel.
+   ============================================== */
+.nav-toggle {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .site-header {
+    top: 14px;
+    padding: 0 14px;
+    justify-content: flex-end;
+    overflow: visible;
+  }
+
+  .site-nav {
+    overflow: visible;
+    padding: 0;
+    border-radius: 24px;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    padding: 0 1.1rem;
+    border: 0;
+    border-radius: 24px;
+    background: transparent;
+    color: var(--c-gray-light2);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+  }
+
+  .nav-toggle:focus-visible {
+    outline: 2px solid var(--c-ice-blue);
+    outline-offset: 2px;
+  }
+
+  /* Icono hamburguesa dibujado con CSS (se convierte en X al abrir) */
+  .nav-toggle-icon,
+  .nav-toggle-icon::before,
+  .nav-toggle-icon::after {
+    display: block;
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--c-ice-blue);
+    transition: transform var(--transition), background-color var(--transition);
+  }
+  .nav-toggle-icon {
+    position: relative;
+  }
+  .nav-toggle-icon::before,
+  .nav-toggle-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+  .nav-toggle-icon::before { top: -6px; }
+  .nav-toggle-icon::after  { top: 6px; }
+
+  .site-nav.is-open .nav-toggle-icon { background: transparent; }
+  .site-nav.is-open .nav-toggle-icon::before { transform: translateY(6px) rotate(45deg); }
+  .site-nav.is-open .nav-toggle-icon::after  { transform: translateY(-6px) rotate(-45deg); }
+
+  /* Panel de enlaces */
+  .nav-list {
+    display: none;
+  }
+
+  .site-nav.is-open {
+    width: min(300px, calc(100vw - 28px));
+    background-color: rgba(43, 7, 9, 0.92);
+  }
+
+  .site-nav.is-open .nav-toggle {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .site-nav.is-open .nav-list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.25rem 0.5rem 0.75rem;
+    white-space: normal;
+  }
+
+  .site-nav.is-open .nav-link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0.9rem;
+    border-radius: 12px;
+    font-size: 1rem;
+  }
+
+  .site-nav.is-open .nav-link:hover,
+  .site-nav.is-open .nav-link:focus-visible {
+    background: rgba(244, 201, 93, 0.08);
+    transform: none;
+  }
+
+  /* El texto del hero empieza por debajo del botón */
+  .hero-wrapper .hero-content {
+    padding-top: 4.75rem;
+  }
+}

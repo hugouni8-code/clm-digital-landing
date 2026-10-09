@@ -18,7 +18,7 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="style.css?v=5" />
+  <link rel="stylesheet" href="style.css?v=6" />
 </head>
 <body>
 
@@ -132,7 +132,12 @@
     <!-- ---- HEADER ---- -->
     <header class="site-header" role="banner">
       <nav class="site-nav" aria-label="Navegación principal">
-        <ul class="nav-list" role="list">
+        <!-- Botón de menú: solo visible en móvil / tablet -->
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-list">
+          <span class="nav-toggle-icon" aria-hidden="true"></span>
+          <span class="nav-toggle-text">Menú</span>
+        </button>
+        <ul class="nav-list" id="nav-list" role="list">
           
           <li>
             <a href="#" class="nav-link active">Inicio</a>
@@ -1240,6 +1245,37 @@
       var t;
       window.addEventListener('load', paint);
       window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(paint, 300); });
+    })();
+  </script>
+
+  <!-- Menú desplegable en móvil -->
+  <script>
+    (function () {
+      var nav = document.querySelector('.site-nav');
+      var toggle = nav && nav.querySelector('.nav-toggle');
+      if (!toggle) return;
+
+      function setOpen(open) {
+        nav.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+
+      toggle.addEventListener('click', function () {
+        setOpen(!nav.classList.contains('is-open'));
+      });
+      // Cerrar al elegir un enlace, al pulsar fuera o con Escape
+      nav.addEventListener('click', function (e) {
+        if (e.target.closest('.nav-link')) setOpen(false);
+      });
+      document.addEventListener('click', function (e) {
+        if (!nav.contains(e.target)) setOpen(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+          setOpen(false);
+          toggle.focus();
+        }
+      });
     })();
   </script>
 
