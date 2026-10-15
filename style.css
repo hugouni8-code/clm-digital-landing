@@ -3416,6 +3416,7 @@ body { background-color: var(--c-dark); }
 }
 
 .org-study {
+  flex-grow: 1;
   max-width: 30ch;
   font-size: 0.95rem;
   line-height: 1.55;
@@ -3434,6 +3435,36 @@ body { background-color: var(--c-dark); }
   font-size: 0.9rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+}
+
+.org-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: var(--sp-sm);
+  padding: 0.55rem 1.1rem;
+  min-height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(244, 201, 93, 0.45);
+  color: var(--c-gray-light2);
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.org-link-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: currentColor;
+}
+
+.org-link:hover,
+.org-link:focus-visible {
+  background-color: var(--c-orange);
+  border-color: var(--c-orange);
+  color: var(--c-white);
 }
 
 @media (min-width: 768px) {
