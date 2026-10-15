@@ -18,7 +18,7 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="style.css?v=6" />
+  <link rel="stylesheet" href="style.css?v=7" />
 </head>
 <body>
 
@@ -292,6 +292,11 @@
               <img src="img/logo-fujifilm.png" alt="Logo Fujifilm" loading="lazy" decoding="async">
             </a>
           </li>
+          <li class="marquee-item">
+            <a href="#colaboradores" class="marquee-plaque" title="Origami">
+              <span class="marquee-wordmark">Origami</span>
+            </a>
+          </li>
         </ul>
         <ul class="marquee-group" role="list" aria-hidden="true">
           <li class="marquee-item">
@@ -332,6 +337,11 @@
           <li class="marquee-item">
             <a href="#colaboradores" class="marquee-plaque" title="Fujifilm" tabindex="-1">
               <img src="img/logo-fujifilm.png" alt="" loading="lazy" decoding="async">
+            </a>
+          </li>
+          <li class="marquee-item">
+            <a href="#colaboradores" class="marquee-plaque" title="Origami" tabindex="-1">
+              <span class="marquee-wordmark">Origami</span>
             </a>
           </li>
         </ul>
@@ -591,6 +601,11 @@
             <p class="nspeaker-role">Consultor y docente universitario en marketing y transformación digital</p>
           </header>
 
+          <div class="nspeaker-talk">
+            <span class="nspeaker-talk-label">Ponencia</span>
+            <p class="nspeaker-talk-title">Título por anunciar</p>
+          </div>
+
           <p class="nspeaker-bio">
             Cofundador de la consultora CuarteroAgurcia y co-organizador del Albacete Marketing Day. Docente en la Universidad de Castilla-La Mancha, forma a profesionales en inteligencia artificial aplicada al marketing y a la estrategia digital.
           </p>
@@ -624,6 +639,11 @@
             <h3 class="nspeaker-name" id="nspeaker-2-name">Carlos Galán Cordero</h3>
             <p class="nspeaker-role">Jurista en Derecho Digital y ciberseguridad</p>
           </header>
+
+          <div class="nspeaker-talk">
+            <span class="nspeaker-talk-label">Ponencia</span>
+            <p class="nspeaker-talk-title">Título por anunciar</p>
+          </div>
 
           <p class="nspeaker-bio">
             Licenciado en Derecho y experto en ciberamenazas y ciberinteligencia. Ha sido técnico jurídico en INCIBE y es profesor en la UC3M y en Nebrija. Trabaja sobre amenazas híbridas, desinformación, privacidad y ciberseguridad.
@@ -659,6 +679,11 @@
             <p class="nspeaker-role">Consultor de innovación y profesor de Inteligencia Artificial</p>
           </header>
 
+          <div class="nspeaker-talk">
+            <span class="nspeaker-talk-label">Ponencia</span>
+            <p class="nspeaker-talk-title">Título por anunciar</p>
+          </div>
+
           <p class="nspeaker-bio">
             Con más de 20 años de trayectoria directiva en agencias como HAVAS y Publicis. Actualmente es consultor de innovación, creador del evento global AI CREATE y profesor de Inteligencia Artificial en el Instituto de Empresa (IE).
           </p>
@@ -681,7 +706,91 @@
 </section>
 <!-- /PRÓXIMOS PONENTES -->
   <!-- Divisor: bambú + motivo chino aleatorio -->
-  <div class="bamboo-divider bd--from-light bd--to-light" style="--from:var(--c-paper);--to:var(--c-paper-2);" aria-hidden="true">
+  <div class="bamboo-divider bd--from-light bd--to-dark" style="--from:var(--c-paper);--to:var(--c-navy);" aria-hidden="true">
+    <div class="bd-up"></div>
+    <div class="bd-down"></div>
+    <span class="bd-stalk"></span>
+  </div>
+
+  <!-- =============================================
+       SECCIÓN: MESA REDONDA
+       Moderador + empresas participantes (con su representante si se conoce)
+  ============================================= -->
+  <section class="roundtable-section" id="mesa-redonda" aria-labelledby="roundtable-heading">
+    <div class="roundtable-container">
+
+      <header class="section-header roundtable-header">
+        <p class="section-kicker" aria-hidden="true">12:30 · Debate</p>
+        <h2 class="section-title" id="roundtable-heading">Mesa Redonda</h2>
+        <p class="section-desc">
+          Empresa, universidad y tecnología frente a frente para debatir el nuevo equilibrio de poder en la era de la inteligencia artificial.
+        </p>
+      </header>
+
+      <!-- Moderador -->
+      <article class="rt-moderator" aria-labelledby="rt-moderator-name">
+        <div class="rt-moderator-photo">
+          <img src="img/moderador-ricardo.jpg" alt="Foto de Ricardo Pérez del Castillo" width="264" height="264" loading="lazy" />
+        </div>
+        <div class="rt-moderator-body">
+          <span class="rt-badge">Moderador</span>
+          <h3 class="rt-moderator-name" id="rt-moderator-name">Ricardo Pérez del Castillo</h3>
+          <p class="rt-moderator-role">Catedrático en la Universidad de Castilla-La Mancha · Grupo de Investigación Alarcos</p>
+        </div>
+      </article>
+
+      <p class="rt-subhead">Participan</p>
+
+      <ul class="rt-grid" role="list">
+
+        <!-- Fortinet -->
+        <li class="rt-item">
+          <article class="rt-company">
+            <div class="rt-logo">
+              <img src="img/logo-fortinet.png" alt="Logo Fortinet" loading="lazy" />
+            </div>
+            <h3 class="rt-company-name">Fortinet</h3>
+            <p class="rt-company-desc">Líder global en ciberseguridad, con soluciones integradas y automatizadas para proteger la infraestructura digital.</p>
+          </article>
+        </li>
+
+        <!-- Fujifilm -->
+        <li class="rt-item">
+          <article class="rt-company">
+            <div class="rt-logo">
+              <img src="img/logo-fujifilm.png" alt="Logo Fujifilm" loading="lazy" />
+            </div>
+            <h3 class="rt-company-name">Fujifilm</h3>
+            <p class="rt-company-desc">Multinacional referente en innovación tecnológica, imagen digital, fotografía y soluciones ópticas avanzadas.</p>
+          </article>
+        </li>
+
+        <!-- CuarteroAgurcia -->
+        <li class="rt-item">
+          <article class="rt-company">
+            <div class="rt-logo">
+              <!-- Sustituir por <img src="img/logo-cuarteroagurcia.png" alt="Logo CuarteroAgurcia"> cuando haya logo -->
+              <span class="rt-wordmark">Cuartero<strong>Agurcia</strong></span>
+            </div>
+            <h3 class="rt-company-name">CuarteroAgurcia</h3>
+            <p class="rt-company-desc">Consultora de marketing y responsabilidad social, organizadora del Albacete Marketing Day junto a la Facultad de Ciencias Económicas y Empresariales de la UCLM.</p>
+            <div class="rt-rep">
+              <img class="rt-rep-photo" src="img/mesa-lissbeth.jpg" alt="" width="266" height="266" loading="lazy" />
+              <div>
+                <p class="rt-rep-name">Lissbeth Reyes Agurcia</p>
+                <p class="rt-rep-role">Consultora en Marketing Digital · Profesora Asociada en la UCLM</p>
+              </div>
+            </div>
+          </article>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+  <!-- /MESA REDONDA -->
+
+  <!-- Divisor: bambú + motivo chino aleatorio -->
+  <div class="bamboo-divider bd--from-dark bd--to-light" style="--from:var(--c-navy);--to:var(--c-paper-2);" aria-hidden="true">
     <div class="bd-up"></div>
     <div class="bd-down"></div>
     <span class="bd-stalk"></span>
@@ -798,6 +907,18 @@
           <h3 class="sponsor-name">Fujifilm</h3>
           <p class="sponsor-desc">
             Compañía multinacional referente en innovación tecnológica, imagen digital, fotografía y soluciones ópticas avanzadas.
+          </p>
+        </article>
+
+        <!-- COLABORADOR: Origami -->
+        <article class="sponsor-card sponsor-regular">
+          <div class="sponsor-logo-box">
+            <!-- Sustituir por <img src="img/logo-origami.png" alt="Logo Origami" loading="lazy"> cuando llegue el logo -->
+            <span class="sponsor-wordmark">Origami</span>
+          </div>
+          <h3 class="sponsor-name">Origami</h3>
+          <p class="sponsor-desc">
+            Estudio de diseño e imprenta de Talavera de la Reina, especializado en diseño gráfico e impresión personalizada: identidad corporativa, tarjetas de visita, flyers y proyectos web.
           </p>
         </article>
 
@@ -1067,47 +1188,40 @@
         </div>
       </div>
 
+      <!-- Comité organizador -->
+      <div class="org-team">
+        <h3 class="org-team-title">Comité organizador</h3>
+        <ul class="org-grid" role="list">
+        <li class="org-item">
+          <article class="org-card">
+            <img class="org-photo" src="img/org-carlos.jpg" alt="Foto de Carlos López Muñoz" width="256" height="256" loading="lazy" />
+            <h4 class="org-name">Carlos López Muñoz</h4>
+            <p class="org-study">Estudiante del Grado en Ingeniería Informática en la UCLM e integrante de Eboratic Junior Empresa.</p>
+          </article>
+        </li>
+        <li class="org-item">
+          <article class="org-card">
+            <img class="org-photo" src="img/org-hugo.jpg" alt="Foto de Hugo Villanueva Padilla" width="256" height="256" loading="lazy" />
+            <h4 class="org-name">Hugo Villanueva Padilla</h4>
+            <p class="org-study">Estudiante del Grado en Ingeniería Informática en la UCLM e integrante de Eboratic Junior Empresa.</p>
+            <span class="org-tag">Desarrollador de la web</span>
+          </article>
+        </li>
+        <li class="org-item">
+          <article class="org-card">
+            <img class="org-photo" src="img/org-laura.jpg" alt="Foto de Laura García García" width="256" height="256" loading="lazy" />
+            <h4 class="org-name">Laura García García</h4>
+            <p class="org-study">Estudiante del Grado en Administración y Dirección de Empresas en la UCLM e integrante de Eboratic Junior Empresa.</p>
+          </article>
+        </li>
+        </ul>
+      </div>
+
     </div>
   </section>
 
 
-  <!-- Divisor: bambú + motivo chino aleatorio -->
-  <div class="bamboo-divider bd--from-dark bd--to-light" style="--from:var(--c-navy);--to:var(--c-paper);" aria-hidden="true">
-    <div class="bd-up"></div>
-    <div class="bd-down"></div>
-    <span class="bd-stalk"></span>
-  </div>
 
-  <!-- =============================================
-       C. SECCIÓN PRÓXIMAMENTE + FOOTER
-  ============================================= -->
-  <section class="coming-section" id="proximamente" aria-labelledby="coming-heading">
-
-    <div class="coming-container">
-
-      <!-- Divisor decorativo -->
-      <div class="coming-divider" aria-hidden="true">
-        <span></span><span class="divider-icon" aria-hidden="true">◆</span><span></span>
-      </div>
-
-      <!-- Bloque central -->
-      <div class="coming-block">
-        <p class="coming-kicker" aria-hidden="true">Quinta edición</p>
-        <h2 class="coming-title" id="coming-heading">Próximamente</h2>
-        <p class="coming-dots" aria-hidden="true">· · ·</p>
-        <time datetime="2026-10-29" class="coming-date" aria-label="Fecha: 29 de octubre de 2026">
-          29/10/2026
-        </time>
-        <p class="coming-tagline">
-          El dragón digital despierta.<br/>
-          <em>¿Estás preparado?</em>
-        </p>
-      </div>
-
-    </div>
-    
-  </section>
-  <!-- /PRÓXIMAMENTE -->
 
   <script>
     // Fecha del evento: 29 de Octubre de 2026 a las 09:00:00
@@ -1213,7 +1327,7 @@
         ['.about-clm-section', 'dark'], ['.schedule-section', 'dark'],
         ['.next-speakers-section', 'light'], ['.sponsors-section', 'light'],
         ['.editions-section', 'light'], ['.speakers-section', 'light'],
-        ['.eboratic-section', 'dark'], ['.coming-section', 'light']
+        ['.roundtable-section', 'dark'], ['.eboratic-section', 'dark']
       ];
       function rnd(a, b) { return a + Math.random() * (b - a); }
 
