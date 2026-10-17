@@ -1,0 +1,189 @@
+/* ==========================================================================
+   CLM-Digital V · animaciones.css
+   Capa de 3D y animaciones al hacer scroll. Se carga DESPUÉS de style.css
+   y no modifica nada de él: solo añade comportamiento.
+
+   Para desactivarla entera: quitar las dos líneas de index.html que
+   cargan animaciones.css y animaciones.js.
+
+   Nota técnica: los efectos usan las propiedades independientes
+   `translate`, `rotate` y `scale` (no `transform`), así se suman a los
+   hovers que ya tiene style.css en vez de pisarlos.
+   ========================================================================== */
+
+:root {
+  --ax-ease: cubic-bezier(0.16, 1, 0.3, 1);   /* salida suave, sin rebote */
+  --ax-dur: 0.95s;
+}
+
+
+/* ---------- 1. Barra de progreso de lectura (arriba del todo) ---------- */
+.ax-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 1001;
+  pointer-events: none;
+  transform-origin: 0 50%;
+  transform: scaleX(var(--ax-p, 0));
+  background: linear-gradient(90deg, var(--c-blue-mid), var(--c-orange) 55%, var(--c-ice-blue));
+  box-shadow: 0 0 12px rgba(244, 201, 93, 0.55);
+}
+
+
+/* ---------- 2. Hero: inclinación y parallax del título ---------- */
+/* Profundidad para la inclinación del bloque de texto del hero */
+html.ax-motion .hero-wrapper .hero-content { perspective: 1400px; }
+html.ax-motion .hero-text-block { will-change: translate, rotate, opacity; }
+
+
+/* ---------- 3. Cuenta atrás: los números giran en 3D al cambiar ---------- */
+.time-box { perspective: 420px; }
+
+html.ax-motion .time-box span.ax-flip {
+  animation: ax-flip 0.6s var(--ax-ease);
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+}
+
+@keyframes ax-flip {
+  from { transform: rotateX(-85deg); opacity: 0.25; }
+  to   { transform: none;            opacity: 1; }
+}
+
+
+/* ---------- 4. Aparición en 3D al hacer scroll ---------- */
+/* El contenedor de cada grupo da la perspectiva */
+.ax-3d { perspective: 1300px; }
+
+/* Estado inicial (solo lo pone el JS, y solo a lo que aún no se ve) */
+html.ax-motion .ax-pre {
+  opacity: 0;
+  translate: 0 64px;
+  rotate: x 24deg;
+  scale: 0.95;
+}
+
+/* Cabeceras de sección: entran algo más suaves */
+html.ax-motion .ax-pre.ax-soft {
+  translate: 0 30px;
+  rotate: x 40deg;
+  scale: 1;
+}
+
+/* Logo de CLM Digital: gira como una moneda */
+html.ax-motion .ax-pre.ax-coin {
+  translate: 0 0;
+  rotate: y 110deg;
+  scale: 0.85;
+}
+
+
+/* ---------- 5. Inclinación 3D con el ratón + brillo ---------- */
+.card,
+.rt-company,
+.org-card { position: relative; }   /* para colocar el brillo dentro */
+
+html.ax-hover .ax-tilt {
+  transition:
+    rotate 0.35s var(--ax-ease),
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition),
+    background var(--transition);
+}
+
+.ax-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    420px circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(255, 233, 180, 0.24),
+    transparent 46%
+  );
+  transition: opacity 0.35s var(--ax-ease);
+}
+
+html.ax-hover .ax-tilt:hover .ax-glare { opacity: 1; }
+
+/* Durante la aparición manda esta transición (va después a propósito) */
+html.ax-motion .ax-run {
+  transition:
+    opacity   var(--ax-dur) var(--ax-ease) var(--ax-d, 0ms),
+    translate var(--ax-dur) var(--ax-ease) var(--ax-d, 0ms),
+    rotate    var(--ax-dur) var(--ax-ease) var(--ax-d, 0ms),
+    scale     var(--ax-dur) var(--ax-ease) var(--ax-d, 0ms),
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition),
+    background var(--transition);
+}
+
+
+/* ---------- 6. Bambú: el tallo crece y los motivos caen al entrar ---------- */
+.bamboo-divider .bd-stalk {
+  transform-origin: 0 50%;
+  transition: scale 1.3s var(--ax-ease);
+}
+
+.bamboo-divider .bd-item {
+  transition: translate 0.9s var(--ax-ease) 0.55s, opacity 0.6s ease-out 0.55s;
+}
+
+html.ax-motion .bamboo-divider.ax-wait .bd-stalk { scale: 0 1; }
+html.ax-motion .bamboo-divider.ax-wait .bd-down .bd-item { translate: 0 -46px; opacity: 0; }
+html.ax-motion .bamboo-divider.ax-wait .bd-up   .bd-item { translate: 0 24px;  opacity: 0; }
+
+
+/* ---------- 7. Programa: la "columna del dragón" persigue la perla ---------- */
+.timeline .ax-spine {
+  position: absolute;
+  z-index: 0;                 /* los puntos (z-index 1) quedan por encima */
+  top: var(--ax-spine-top, 0px);
+  left: calc(var(--time-col) + var(--gap) + (var(--dot-col) / 2) - 1.5px);
+  width: 3px;
+  height: var(--ax-spine-h, 0px);
+  border-radius: 3px;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--c-ice-blue), var(--c-orange));
+  box-shadow: 0 0 10px rgba(244, 201, 93, 0.65);
+}
+
+/* La perla llameante que persiguen los dragones */
+.timeline .ax-spine::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  width: 18px;
+  height: 18px;
+  margin-left: -9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FFF3C4 0%, var(--c-ice-blue) 38%, var(--c-orange) 78%);
+  box-shadow: 0 0 18px 4px rgba(227, 64, 42, 0.55), 0 0 4px rgba(255, 243, 196, 0.9);
+}
+
+.timeline .ax-spine.ax-spine-idle::after { opacity: 0; }
+
+/* Cada punto se enciende cuando la perla lo alcanza */
+.timeline-item .timeline-dot { transition: background-color 0.4s ease-out, box-shadow 0.4s ease-out, scale 0.4s var(--ax-ease); }
+.timeline-item.ax-lit .timeline-dot {
+  background: var(--c-ice-blue);
+  box-shadow: 0 0 0 6px rgba(244, 201, 93, 0.18), 0 0 18px rgba(244, 201, 93, 0.55);
+  scale: 1.12;
+}
+
+
+/* ---------- 8. Accesibilidad: sin movimiento si el usuario lo pide ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .ax-progress { display: none; }
+  .bamboo-divider .bd-stalk,
+  .bamboo-divider .bd-item,
+  .timeline-item .timeline-dot { transition: none; }
+}
