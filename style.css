@@ -3475,3 +3475,54 @@ body { background-color: var(--c-dark); }
   .rt-company:hover,
   .org-card:hover { transform: none; }
 }
+
+
+/* ==============================================
+   SECCIÓN: PLANO DEL EVENTO (fondo oscuro)
+   ============================================== */
+.venue-map-section {
+  position: relative;
+  background: var(--c-navy);
+  padding: var(--sp-xl) var(--sp-sm);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.venue-map-container {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.venue-map-header .section-kicker { color: var(--c-ice-blue); }
+.venue-map-header .section-title  { color: var(--c-white); }
+.venue-map-header .section-desc   { color: var(--c-pale-blue); }
+
+.venue-map {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.venue-map-link {
+  display: block;
+  background: var(--c-white);
+  border-radius: var(--radius-card);
+  padding: var(--sp-sm);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.venue-map-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.venue-map-caption {
+  margin-top: var(--sp-sm);
+  font-size: 0.875rem;
+  color: var(--c-pale-blue);
+}
+
+@media (min-width: 768px) {
+  .venue-map-section { padding: var(--sp-xl) var(--sp-md); }
+}

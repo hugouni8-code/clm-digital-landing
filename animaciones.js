@@ -32,6 +32,7 @@
     ['.rt-moderator', ''],
     ['.rt-subhead', 'ax-soft'],
     ['.rt-company', ''],
+    ['.venue-map', ''],
     ['.sponsor-card', ''],
     ['.cards-grid > .card', ''],
     ['.speaker-item', ''],
