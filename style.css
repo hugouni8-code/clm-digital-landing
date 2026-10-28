@@ -3526,3 +3526,103 @@ body { background-color: var(--c-dark); }
 @media (min-width: 768px) {
   .venue-map-section { padding: var(--sp-xl) var(--sp-md); }
 }
+
+
+/* ==============================================
+   COMUNICADO DE LUTO (primera pantalla)
+   ============================================== */
+.mourning-section {
+  --mourning-bg:   #F3F1EE;
+  --mourning-ink:  #141414;
+  --mourning-soft: #4A4744;
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-xl) var(--sp-sm);
+  background: var(--mourning-bg);
+  color: var(--mourning-ink);
+  text-align: center;
+}
+
+.mourning-content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.mourning-ribbon {
+  display: block;
+  width: clamp(120px, 26vw, 190px);
+  height: auto;
+  margin: 0 auto var(--sp-md);
+}
+
+.mourning-ribbon .mr-band {
+  fill: none;
+  stroke: var(--mourning-ink);
+  stroke-width: 34;
+  stroke-linejoin: round;
+}
+
+.mourning-ribbon .mr-gap {
+  fill: none;
+  stroke: var(--mourning-bg);
+  stroke-width: 44;
+}
+
+.mourning-kicker {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mourning-soft);
+  margin-bottom: var(--sp-sm);
+}
+
+.mourning-title {
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: clamp(1.9rem, 5.5vw, 3.2rem);
+  line-height: 1.1;
+  color: var(--mourning-ink);
+  margin-bottom: var(--sp-md);
+}
+
+.mourning-text p {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  line-height: 1.65;
+  color: var(--mourning-soft);
+  margin-bottom: var(--sp-sm);
+}
+
+.mourning-text .mourning-condolence {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.15rem, 3vw, 1.4rem);
+  line-height: 1.5;
+  color: var(--mourning-ink);
+  margin: var(--sp-md) 0;
+}
+
+.mourning-signature {
+  margin-top: var(--sp-md);
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: var(--mourning-ink);
+}
+
+/* El menú flotante se oculta mientras se lee el comunicado */
+.site-header.is-hidden-by-mourning {
+  opacity: 0;
+  visibility: hidden;
+}
+.site-header {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}

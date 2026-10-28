@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="CLM-Digital V — IA: El despertar del dragón digital. El nuevo equilibrio de poder en la era de la inteligencia artificial. 29/10/2026." />
+  <meta name="description" content="CLM-Digital V se pospone hasta nuevo aviso. Eboratic se suma al pésame a las familias del accidente de Urda. Informaremos de la nueva fecha." />
   <link rel="icon" type="image/png" href="img/logo-clm-digital.png">
-  <title>CLM-Digital V · IA: El despertar del dragón digital</title>
+  <title>CLM-Digital V · Evento pospuesto hasta nuevo aviso</title>
 
   <!-- =============================================
        GOOGLE FONTS
@@ -18,7 +18,7 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="style.css?v=10" />
+  <link rel="stylesheet" href="style.css?v=11" />
   <!-- Capa de 3D y animaciones (para desactivarla, borra esta línea y la de animaciones.js) -->
   <link rel="stylesheet" href="animaciones.css?v=2" />
 </head>
@@ -129,6 +129,32 @@
   <!-- =============================================
        A. HEADER + HERO SECTION (100vh)
   ============================================= -->
+  <section class="mourning-section" id="comunicado" aria-labelledby="mourning-heading">
+    <div class="mourning-content">
+
+      <!-- Lazo negro de luto -->
+      <svg class="mourning-ribbon" viewBox="0 0 200 270" role="img" aria-label="Lazo negro de luto">
+        <path class="mr-band" d="M68 250 L127 124 C152 76 146 26 100 26 C54 26 48 76 73 124 L132 250"/>
+        <path class="mr-gap"  d="M88 156 L118 220"/>
+        <path class="mr-band" d="M80 139 L126 237"/>
+      </svg>
+
+      <p class="mourning-kicker">CLM-Digital V · Comunicado</p>
+      <h1 class="mourning-title" id="mourning-heading">El evento se pospone hasta nuevo aviso</h1>
+
+      <div class="mourning-text">
+        <p>Sentimos mucho tener que comunicar que el evento de mañana se pospone.</p>
+        <p>Una jornada con la mirada puesta en el futuro no puede coexistir con la tremenda tragedia que nos conmociona a todos.</p>
+        <p class="mourning-condolence">Eboratic se suma al pésame a las familias del accidente de Urda.</p>
+        <p>Informaremos de la nueva fecha.</p>
+      </div>
+
+      <p class="mourning-signature">Eboratic</p>
+
+    </div>
+  </section>
+  <!-- /COMUNICADO -->
+
   <section class="hero-wrapper" aria-label="Sección principal del evento">
 
     <!-- ---- HEADER ---- -->
@@ -195,9 +221,9 @@
         </p>
 
         <!-- Título principal: 2 líneas anchas estilo póster -->
-        <h1 class="hero-title">
+        <h2 class="hero-title">
           IA: El despertar del dragón digital
-        </h1>
+        </h2>
 
         <!-- Subtítulo en Playfair Display Italic -->
         <p class="hero-subtitle">
@@ -205,9 +231,9 @@
         </p>
 
         <!-- CTA decorativo de fecha -->
-        <div class="hero-cta-date" aria-label="Fecha del evento: 29 de octubre de 2026">
+        <div class="hero-cta-date">
           <span class="cta-ornament" aria-hidden="true">—</span>
-          <time datetime="2026-10-29" class="cta-date-text">29 · 10 · 2026</time>
+          <span class="cta-date-text">Pospuesto hasta nuevo aviso</span>
           <span class="cta-ornament" aria-hidden="true">—</span>
         </div>
         
@@ -222,25 +248,6 @@
         <!-- /BOTÓN DE UBICACIÓN -->
         <!-- ========================================== -->
 
-        <!-- CUENTA REGRESIVA -->
-        <div class="countdown-container" aria-label="Cuenta regresiva para el evento">
-          <div class="time-box">
-            <span id="days">00</span>
-            <p>Días</p>
-          </div>
-          <div class="time-box">
-            <span id="hours">00</span>
-            <p>Hrs</p>
-          </div>
-          <div class="time-box">
-            <span id="minutes">00</span>
-            <p>Min</p>
-          </div>
-          <div class="time-box">
-            <span id="seconds">00</span>
-            <p>Seg</p>
-          </div>
-        </div>
       </div>
     </div>
     <!-- /HERO -->
@@ -410,7 +417,7 @@
     <div class="schedule-container">
 
       <header class="section-header schedule-header">
-        <p class="section-kicker" aria-hidden="true">29 · 10 · 2026</p>
+        <p class="section-kicker">Pospuesto · Nueva fecha por anunciar</p>
         <h2 class="section-title" id="schedule-heading">Programa del Evento</h2>
         <p class="section-desc">
           Una jornada de charlas, debate y networking para entender el nuevo equilibrio de poder en la era de la IA.
@@ -1300,32 +1307,17 @@
 
 
 
+
   <script>
-    // Fecha del evento: 29 de Octubre de 2026 a las 09:00:00
-    const eventDate = new Date("Oct 29, 2026 09:00:00").getTime();
-
-    const timer = setInterval(function() {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
-
-      // Cálculos de tiempo
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      // Si la cuenta no ha terminado, actualizamos el HTML
-      if (distance > 0) {
-        document.getElementById("days").innerHTML = String(days).padStart(2, '0');
-        document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
-        document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
-        document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
-      } else {
-        // Si el evento ya empezó, detenemos el contador y mostramos ceros
-        clearInterval(timer);
-        document.querySelector(".countdown-container").innerHTML = "<h3 style='color: var(--c-ice-blue); font-family: var(--font-title);'>¡El evento ha comenzado!</h3>";
-      }
-    }, 1000);
+    // Oculta el menú flotante mientras el comunicado de luto ocupa la pantalla
+    (function () {
+      var notice = document.getElementById('comunicado');
+      var header = document.querySelector('.site-header');
+      if (!notice || !header || !('IntersectionObserver' in window)) return;
+      new IntersectionObserver(function (entries) {
+        header.classList.toggle('is-hidden-by-mourning', entries[0].intersectionRatio > 0.35);
+      }, { threshold: [0, 0.35, 1] }).observe(notice);
+    })();
   </script>
 
   <script>
@@ -1490,6 +1482,6 @@
 
 
   <!-- Capa de 3D y animaciones -->
-  <script src="animaciones.js?v=2"></script>
+  <script src="animaciones.js?v=3"></script>
 </body>
 </html>

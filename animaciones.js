@@ -209,7 +209,7 @@
   function heroProgress() {
     if (!hero) return 0;
     var h = hero.offsetHeight || 1;
-    return Math.max(0, Math.min(1, window.scrollY / h));
+    return Math.max(0, Math.min(1, (window.scrollY - hero.offsetTop) / h));
   }
 
   function updateHero(p) {
